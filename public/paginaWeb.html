@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alquiler de Coches</title>
+    <link rel="stylesheet" href="estilosPaginaWeb.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.10.2/dist/fullcalendar.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="menu-lateral" id="menu-lateral">
+        <div class="icono-menu" id="icono-menu">&#9776;</div>
+        <div class="opciones-menu" id="opciones-menu">
+            <ul>
+                <li data-opcion="horario">Horario</li>
+                <li data-opcion="ubicacion">Ubicación</li>
+                <li data-opcion="catalogo">Catálogo de Coches</li>
+                <li data-opcion="contactos">Contactos</li>
+                <li data-opcion="procedimiento">Procedimiento</li>
+                <li data-opcion="contrato">Contrato</li>
+                <li data-opcion="reserva">Reserva</li>
+                <li data-opcion="tus-reservas">Tus Reservas</li>
+            </ul>
+            <div class="usuario-info">
+                <div id="usuarioNombre">Usuario: Juan Perez</div>
+                <button id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenido">
+        <div class="imagen-empresa">
+            <img src="logo-empresa.png" alt="Logo de la Empresa">
+        </div>
+        <div id="contenido-cambio" class="bienvenida-contenido">
+            <h1 class="bienvenida-titulo">¡Bienvenido a Llumacar!</h1>
+            <p class="bienvenida-descripcion">
+                Gracias por confiar en nosotros. En <strong>Llumacar</strong>,
+                nos esforzamos por ofrecerte la mejor experiencia de alquiler de vehículos.
+                Ya sea para un viaje de negocios, unas vacaciones familiares o una aventura espontánea,
+                estamos aquí para asegurarnos de que encuentres el coche perfecto para tus necesidades.
+            </p>
+            <p class="bienvenida-gratitud">
+                Agradecemos tu preferencia y el uso de nuestra plataforma.
+                Si tienes alguna pregunta, no dudes en visitar nuestras secciones de contacto o catálogo.
+                ¡Estamos encantados de ayudarte!
+            </p>
+        </div>
+    </div>
+
+    <script src="paginaScript.js"></script>
+</body>
+
+</html>

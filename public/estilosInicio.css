@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 10px; 
+    overflow-x: hidden; 
+}
+
+.container {
+    width: 100%;
+    max-width: 600px; 
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; 
+    max-height: 95vh; 
+}
+
+.language-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 14px;
+}
+
+#language-list {
+    display: none;
+    position: absolute;
+    list-style-type: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.language-menu:hover #language-list {
+    display: block;
+}
+
+#language-list li {
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+#language-list li:hover {
+    background-color: #f0f0f0;
+}
+
+#language-list li .flag {
+    width: 20px;
+    height: 15px;
+    margin-right: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.5rem; 
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    font-size: 1rem; 
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="tel"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 1rem; 
+    width: 100%;
+}
+
+button {
+    padding: 6px; 
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.8rem; 
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 48%; 
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn.blue {
+    background-color: #007bff;
+}
+
+.btn.blue:hover {
+    background-color: #0056b3;
+}
+
+.btn.gray {
+    background-color: #ccc;
+}
+
+.btn.gray:hover {
+    background-color: #999;
+}
+
+button[type="button"] {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+}
+
+button[type="button"]:hover {
+    background-color: #e0e0e0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; 
+}
+
+#login-form {
+    display: block;
+}
+
+#register-form {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="tel"] {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    label {
+        font-size: 0.8rem;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="tel"] {
+        font-size: 0.8rem;
+    }
+
+    button {
+        font-size: 0.8rem;
+    }
+}

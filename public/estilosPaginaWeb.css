@@ -1,0 +1,409 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    display: flex;
+    min-height: 100vh;
+}
+
+#menu-lateral {
+    width: 60px;  
+    background-color: #2c3e50;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease;  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.icono-menu {
+    font-size: 30px;
+    cursor: pointer;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.icono-menu:hover {
+    background-color: #34495e;
+}
+
+#opciones-menu {
+    display: none;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+#opciones-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#opciones-menu li {
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-bottom: 1px solid #34495e;
+}
+
+#opciones-menu li:hover {
+    background-color: #16a085;
+}
+
+.contenido {
+    margin-left: 60px; 
+    padding: 20px;
+    flex-grow: 1;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: margin-left 0.3s ease; 
+    
+    
+}
+
+.imagen-empresa img {
+    width: 150px;
+    height: auto;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#contenido-cambio {
+    margin-top: 100px;
+    font-size: 18px;
+    color: #333;
+}
+
+.usuario-info {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+#menu-lateral:not(.open) + .contenido {
+    margin-left: 60px;  
+}
+
+#menu-lateral.open {
+    width: 250px;  
+}
+
+.contenido-open {
+    margin-left: 250px; 
+}
+
+.bienvenida-contenido {
+    text-align: center;
+    margin: 50px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.bienvenida-titulo {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-family: 'Georgia', serif;
+    animation: slideInFromLeft 1s ease-in-out;
+}
+
+.bienvenida-descripcion {
+    font-size: 1.2rem;
+    color: #34495e;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    animation: fadeInText 2s ease-in;
+}
+
+.bienvenida-gratitud {
+    font-size: 1.1rem;
+    color: #3c6382;
+    font-style: italic;
+    animation: slideInFromRight 1.2s ease-in-out;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead tr {
+    background-color: #2c3e50;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+td:last-child {
+    color: #d32f2f; /* Resalta "Cerrado" en rojo */
+}
+
+.categorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.categoria {
+    width: calc(50% - 20px);
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.categoria h3 {
+    color: #2c3e50;
+}
+
+.categoria ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.categoria ul li {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categoria ul li:hover {
+    background-color: #16a085;
+    color: white;
+}
+
+.categoria table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+.categoria table th,
+.categoria table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 400px;
+}
+
+.modal-content img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.calendar-placeholder {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+.contacto-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contacto-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contacto-item i {
+    font-size: 24px;
+    color: #16a085;
+}
+
+.contacto-item h4 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 18px;
+}
+
+.contacto-item p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.contacto-item a {
+    color: #16a085;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contacto-item a:hover {
+    color: #2c3e50;
+}
+
+.menu-lateral .opciones-menu ul li[data-opcion="reserva"],
+.menu-lateral .opciones-menu ul li[data-opcion="tus-reservas"] {
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-lateral .opciones-menu ul li[data-opcion="reserva"]:hover,
+.menu-lateral .opciones-menu ul li[data-opcion="tus-reservas"]:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+#terminos-condiciones {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+}
+
+.termino {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.termino h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.termino p {
+    color: #555;
+}
+
+.aviso-contrato {
+    font-size: 14px;
+    color: #888;
+    font-style: italic;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#informacion-contrato {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #3498db;  
+}
+
