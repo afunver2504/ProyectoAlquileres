@@ -24,7 +24,7 @@ const upload = multer({ storage });
 // Ruta para crear una reserva
 router.post('/createReservation', verificarToken, upload.single('contract'), async (req, res) => {
     try {
-        const { carId, tariffType, startDate, endDate } = req.body;
+        const { carId, tariffType, startDate, endDate} = req.body;
 
         if (!carId || !tariffType || !startDate || !endDate || !req.file) {
             return res.status(400).json({ message: 'Faltan campos obligatorios.' });
@@ -49,7 +49,7 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
         }
 
         // Obtener la tarifa seleccionada
-        const tariff = car.tariff.find(t => t.type === tariffType);
+        const tariff = car.tariff.find(t => t.type.toLowerCase().trim() === tariffType.toLowerCase().trim());
         if (!tariff) {
             return res.status(400).json({ message: 'Tarifa no encontrada para este vehículo.' });
         }

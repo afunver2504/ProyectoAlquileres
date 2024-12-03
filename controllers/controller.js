@@ -168,7 +168,7 @@ async function obtenerCochePorId(req, res) {
             return res.status(404).json({ message: 'Coche no encontrado.' });
         }
 
-        res.json(coche);  // Enviar el coche encontrado al cliente
+        res.json(coche);  
     } catch (error) {
         console.error('Error al obtener coche:', error);
         res.status(500).json({ message: 'Error al obtener el coche.' });

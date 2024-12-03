@@ -4,6 +4,7 @@ const cors = require("cors");
 const auth_paths = require("./routes/userRoutes.js");
 const vehiclePaths = require("./routes/vehicleRoutes.js");
 const reservationRoutes = require('./routes/reservationRoutes');
+const Vehicle = require('./models/vehicle');
 
 console.log("Iniciando servidor...");
 conector.conexion(); 
@@ -16,18 +17,32 @@ app.listen(5000, function () {
     console.log("Servidor escuchando en el puerto 5000");
 });
 
-app.get('/vehicles/cars/:id', async (req, res) => {
+app.get('/vehicles/cars/:id/:name', async (req, res) => {
     try {
         const cocheId = req.params.id;
-        const coche = await Vehicle.findById(cocheId);
+        const cocheNombre = req.params.name;
+        const coche = await Vehicle.findOne({ category: "Economica" });
 
         if (!coche) {
-            return res.status(404).json({ message: 'Coche no encontrado.' });
+            return res.status(404).json({ message: 'Coche n encontrado.' });
         }
 
-        res.json(coche);  // Devolver la información del coche
+        //const vehiculo = coche.vehicle.find(v => v.name.toString() === cocheNombre);
+        const vehiculo = coche.vehicle;
+        
+        if (!vehiculo) {
+            return res.status(404).json({ message: 'Vehículo no encontrado dentro de la categoría.' });
+        }
+
+        for (let index = 0; index < vehiculo.length; index++) {
+            if (vehiculo[index].name===cocheNombre){
+                const modeloCoche = vehiculo[index]
+                res.json(modeloCoche);
+            }
+        }
+    
     } catch (error) {
-        console.error('Error al obtener coche:', error);
+        console.error("Error  obtener el coche:", error);
         res.status(500).json({ message: 'Error al obtener el coche.' });
     }
 });

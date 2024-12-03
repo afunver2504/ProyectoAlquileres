@@ -1,7 +1,7 @@
 [
   {
     "category": "Economica",
-    "vehicle": [
+    "vehicles": [
       {
         "name": "Renault Clio Diesel",
         "tariff": [
@@ -114,7 +114,7 @@
   },
   {
     "category": "Gama Media",
-    "vehicle": [
+    "vehicles": [
       {
         "name": "Citroen C4 Diesel",
         "tariff": [
@@ -200,7 +200,7 @@
   },
   {
     "category": "Business",
-    "vehicle": [
+    "vehicles": [
       {
         "name": "Fiat Tipo Automático Diesel",
         "tariff": [
@@ -313,16 +313,30 @@
   },
   {
     "category": "Gran Turismo",
-    "vehicle": [
+    "vehicles": [
       {
         "name": "Land Rover con bola 300CV Diesel",
         "tariff": [
           {
-            "type": "Única",
+            "type": "Básica",
             "mileage": "350km",
             "deposit": 450,
             "prices": {
-              "1_day": 140
+              "1-3_days": 140,
+              "4-6_days": 140,
+              "7_days": 140,
+              "1_month": 4340
+            }
+          },
+          {
+            "type": "Plus",
+            "mileage": "350km",
+            "deposit": 450,
+            "prices": {
+              "1-3_days": 140,
+              "4-6_days": 140,
+              "7_days": 140,
+              "1_month": 4340
             }
           }
         ]
@@ -330,5 +344,6 @@
     ]
   }
 ]
+
 
 

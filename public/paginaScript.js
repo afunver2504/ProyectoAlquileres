@@ -295,8 +295,8 @@ function mostrarContenido(opcion) {
                         <!-- Selección de la tarifa -->
                         <label for="seleccionar-tarifa">Selecciona la tarifa:</label>
                         <select id="seleccionar-tarifa">
-                            <option value="tarifaBasica">Tarifa Básica</option>
-                            <option value="tarifaPlus">Tarifa Plus</option>
+                            <option value="Básica">Tarifa Básica</option>
+                            <option value="Plus">Tarifa Plus</option>
                         </select>
             
                         <!-- Selector de fechas -->
@@ -399,7 +399,7 @@ function renderCochesReserva() {
     ];
 
     const botonesCoches = document.getElementById("botones-coches");
-    botonesCoches.innerHTML = ''; 
+    botonesCoches.innerHTML = '';
 
     coches.forEach(coche => {
         const button = document.createElement("button");
@@ -425,7 +425,7 @@ async function seleccionarCoche(cocheId, cocheNombre) {
     document.getElementById('fecha-inicio').addEventListener('change', () => actualizarPrecio());
     document.getElementById('fecha-fin').addEventListener('change', () => actualizarPrecio());
     document.getElementById('seleccionar-tarifa').addEventListener('change', () => actualizarPrecio());
-    document.getElementById('confirmar-reserva').addEventListener('click', () => confirmarReserva(cocheId));
+    document.getElementById('confirmar-reserva').addEventListener('click', () => confirmarReserva(cocheId,cocheNombre));
 }
 
 function actualizarPrecio() {
@@ -443,10 +443,29 @@ function actualizarPrecio() {
 
         const diasReserva = calcularDiasReserva(fechaInicio, fechaFin);
 
-        const precioBase = 30; 
-        const precioTotal = diasReserva * precioBase * (tarifaSeleccionada === 'tarifaPlus' ? 1.2 : 1); 
+        const tariff = car.tariff.find(t => t.type.toLowerCase().trim() === tarifaSeleccionada.toLowerCase().trim());
+        if (!tariff) {
+            return res.status(400).json({ message: 'Tarifa no encontrada para este vehículo.' });
+        }
 
-        document.getElementById('precio-tarifa').innerText = `${precioTotal}€`;
+        let dailyPrice = 0;
+        if (diasReserva >= 1 && diasReserva <= 3) {
+            dailyPrice = tariff.prices["1-3_days"];
+        } else if (diasReserva >= 4 && diasReserva <= 6) {
+            dailyPrice = tariff.prices["4-6_days"];
+        } else if (diasReserva === 7) {
+            dailyPrice = tariff.prices["7_days"];
+        } else if (diasReserva >= 30) {
+            dailyPrice = tariff.prices["1_month"];
+        }
+
+        if (dailyPrice === 0) {
+            return res.status(400).json({ message: 'La duración de la reserva no es válida.' });
+        }
+
+        const precioTotal = dailyPrice * diasReserva;
+
+        document.getElementById('precio-tarifa').innerText = `${precioTotal}`;
     }
 }
 
@@ -458,24 +477,25 @@ function calcularDiasReserva(fechaInicio, fechaFin) {
     return dias;
 }
 
-// Función para obtener los detalles de un coche por su ID desde el backend
-async function obtenerCochePorId(cocheId) {
+async function obtenerCochePorId(cocheId,cocheNombre) {
+    console.log("Obteniendo coche con ID:", cocheId, cocheNombre);
     try {
-        const response = await fetch(`http://localhost:5000/cars/${cocheId}`);
+        const response = await fetch(`http://localhost:5000/vehicles/cars/${cocheId}/${cocheNombre}`);
+        const coche = await response.json();
         if (!response.ok) {
+            console.log(coche)
             throw new Error("Coche no encontrado");
         }
-        const coche = await response.json();
-        console.log("Coche recuperado:", coche);  // Verifica qué se está devolviendo
+       
+        console.log("Coche recuperado:", coche); 
         return coche;
     } catch (error) {
         console.error("Error al obtener coche:", error);
-        return null;  // Retorna null si no se encuentra el coche
     }
 }
 
 
-async function confirmarReserva(cocheId) {
+async function confirmarReserva(cocheId,cocheNombre) {
     const fechaInicio = document.getElementById('fecha-inicio').value;
     const fechaFin = document.getElementById('fecha-fin').value;
     const tarifaSeleccionada = document.getElementById('seleccionar-tarifa').value;
@@ -487,29 +507,36 @@ async function confirmarReserva(cocheId) {
     }
 
     // Obtén el coche por su ID
-    const coche = await obtenerCochePorId(cocheId);
+    const coche = await obtenerCochePorId(cocheId,cocheNombre);
     if (!coche) {
         alert("No se pudo encontrar los detalles del coche.");
         return;
     }
 
-    console.log("Detalles del coche:", coche); // Verifica que el coche tiene la propiedad 'tariff'
+    console.log("Detalles del coche:", coche); 
 
-    // Obtener la tarifa seleccionada y el precio correspondiente
-    const tarifa = coche.tariff.find(t => t.type === tarifaSeleccionada);
+    const tarifas = coche.vehicle.flatMap(v => v.tariff); 
+    if (!coche.vehicle || coche.vehicle.length === 0) {
+        alert("Este coche no tiene vehículos asociados con tarifas.");
+        return;
+    }
+    if (!tarifas) {
+        alert("Tarifas no disponibles para este vehículo.");
+        return;
+    }
+
+    const tarifa = tarifas.find(t => t.type.toLowerCase().trim() === tarifaSeleccionada.toLowerCase().trim());
     if (!tarifa) {
         alert("Tarifa no encontrada.");
         return;
     }
 
-    // Aquí agregas el cálculo del precio usando la tarifa seleccionada
     let totalPrice = 0;
 
     const fechaInicioObj = new Date(fechaInicio);
     const fechaFinObj = new Date(fechaFin);
     const diferenciaEnDias = Math.ceil((fechaFinObj - fechaInicioObj) / (1000 * 3600 * 24));
 
-    // Ajuste del precio basado en la duración
     if (diferenciaEnDias <= 3) {
         totalPrice = tarifa.prices["1-3_days"] * diferenciaEnDias;
     } else if (diferenciaEnDias <= 6) {
@@ -517,10 +544,9 @@ async function confirmarReserva(cocheId) {
     } else if (diferenciaEnDias <= 7) {
         totalPrice = tarifa.prices["7_days"] * diferenciaEnDias;
     } else {
-        totalPrice = tarifa.prices["1_month"];  // Si la duración es mayor a 7 días, se usa el precio mensual
+        totalPrice = tarifa.prices["1_month"];  
     }
 
-    // Agregar la fianza al precio total
     totalPrice += tarifa.deposit;
 
     const formData = new FormData();
@@ -537,15 +563,17 @@ async function confirmarReserva(cocheId) {
             method: 'POST',
             body: formData,
             headers: {
-                'x-auth-token': token 
+                'x-auth-token': token
             }
         });
 
         if (response.ok) {
             alert("Reserva realizada correctamente.");
         } else {
-            const errorData = await response.json();
+            const errorData = await response.json(); 
+            console.error("Error en la solicitud:", errorData);
             alert(errorData.message || "Error en la reserva.");
+            return;
         }
     } catch (error) {
         alert("Error en la reserva.");
@@ -569,8 +597,8 @@ function initCalendar(reservedDates) {
     const calendarEl = document.getElementById("calendar");
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: "dayGridMonth", 
-        events: reservedDates, 
+        initialView: "dayGridMonth",
+        events: reservedDates,
         dateClick: function (info) {
             alert("Fecha seleccionada: " + info.dateStr);
         },
