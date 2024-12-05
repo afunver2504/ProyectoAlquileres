@@ -19,30 +19,22 @@ app.listen(5000, function () {
 
 app.get('/vehicles/cars/:id/:name', async (req, res) => {
     try {
-        const cocheId = req.params.id;
-        const cocheNombre = req.params.name;
-        const coche = await Vehicle.findOne({ category: "Economica" });
+        const { id: cocheId, name: cocheNombre } = req.params;
+
+        const coche = await Vehicle.findById(cocheId);
 
         if (!coche) {
-            return res.status(404).json({ message: 'Coche n encontrado.' });
+            return res.status(404).json({ message: 'Coche no encontrado.' });
         }
 
-        //const vehiculo = coche.vehicle.find(v => v.name.toString() === cocheNombre);
-        const vehiculo = coche.vehicle;
-        
-        if (!vehiculo) {
-            return res.status(404).json({ message: 'Vehículo no encontrado dentro de la categoría.' });
+        if (coche.name !== cocheNombre) {
+            return res.status(404).json({ message: 'El nombre del coche no coincide.' });
         }
 
-        for (let index = 0; index < vehiculo.length; index++) {
-            if (vehiculo[index].name===cocheNombre){
-                const modeloCoche = vehiculo[index]
-                res.json(modeloCoche);
-            }
-        }
-    
+        res.json(coche);
+
     } catch (error) {
-        console.error("Error  obtener el coche:", error);
+        console.error("Error al obtener el coche:", error);
         res.status(500).json({ message: 'Error al obtener el coche.' });
     }
 });

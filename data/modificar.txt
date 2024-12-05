@@ -1,0 +1,200 @@
+PaginaScripts.js:
+
+function renderCategoria(nombre, fianza, vehiculos, tarifas) {
+    const vehiculosHtml = vehiculos.map(v => `
+        <li onclick="mostrarDetalles('${v._id}', '${v.nombre}', '${v.descripcion}', '${v.imagen}')">${v.nombre}</li>
+    `).join('');
+
+
+    const tarifasHtml = tarifas.map(t => `
+        <tr>
+            <td>${t.dias}</td>
+            <td>${t.tarifaBasica}€</td>
+            <td>${t.tarifaPlus ? t.tarifaPlus + "€" : "N/A"}</td>
+        </tr>
+    `).join('');
+
+    return `
+        <div class="categoria">
+            <h3>${nombre}</h3>
+            <p>Fianza: ${fianza}€</p>
+            <ul>${vehiculosHtml}</ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Días</th>
+                        <th>Tarifa Básica</th>
+                        <th>Tarifa Plus</th>
+                    </tr>
+                </thead>
+                <tbody>${tarifasHtml}</tbody>
+            </table>
+        </div>
+    `;
+}
+
+function mostrarDetalles(id, nombre, descripcion, imagen) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>${nombre}</h2>
+            <p>${descripcion}</p>
+            <img src="${imagen}" alt="${nombre}" />
+            <button onclick="cerrarModal()">Cerrar</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+}
+
+function renderCochesReserva() {
+    const coches = [
+        { _id: "673e1afbc675a2d23d31ae4c", nombre: "Renault Clio Diesel", imagen: "image/RenaultClioDiesel.jfif" },
+        { _id: "673e1afbc675a2d23d31ae4c", nombre: "Peugeot 208 Diesel", imagen: "image/Peugeot208Diesel.jfif" },
+        { _id: "673e1afbc675a2d23d31ae4c", nombre: "Opel Corsa Gasolina", imagen: "image/OpelCorsaGasolina.webp" },
+        { _id: "673e1afbc675a2d23d31ae4c", nombre: "Citroen C3 Biplaza Diesel", imagen: "image/CitroenC3BiplazaDiesel.jpg" },
+        { _id: "673e1afbc675a2d23d31ae4d", nombre: "Citroen C4 Diesel", imagen: "image/Citroen C4 Diesel.jfif" },
+        { _id: "673e1afbc675a2d23d31ae4d", nombre: "Seat Leon Diesel", imagen: "image/Seat Leon Diesel.jpg" },
+        { _id: "673e1afbc675a2d23d31ae4d", nombre: "Ford Focus Diesel", imagen: "image/Ford Focus Diesel.jfif" },
+        { _id: "673e1afbc675a2d23d31ae4e", nombre: "Fiat Tipo Automático Diesel", imagen: "image/Fiat Tipo Automático Diesel.webp" },
+        { _id: "673e1afbc675a2d23d31ae4e", nombre: "Fiat Tipo Manual Gasolina/GLP", imagen: "image/Fiat Tipo Manual Gasolina.jpg" },
+        { _id: "673e1afbc675a2d23d31ae4e", nombre: "Opel Insignia Diesel", imagen: "image/Opel Insignia Diesel.webp" },
+        { _id: "673e1afbc675a2d23d31ae4e", nombre: "Ford C-MAX Gasolina", imagen: "image/Ford C-MAX Gasolina.jpg" },
+        { _id: "673e1afbc675a2d23d31ae4f", nombre: "Land Rover con bola 300CV Diesel", imagen: "image/Land Rover.jfif" }
+    ];
+
+    const botonesCoches = document.getElementById("botones-coches");
+    botonesCoches.innerHTML = '';
+
+    coches.forEach(coche => {
+        const button = document.createElement("button");
+        button.classList.add("boton-coche");
+        button.onclick = () => seleccionarCoche(coche._id, coche.nombre);
+        button.innerHTML = `
+            <img src="${coche.imagen}" alt="${coche.nombre}" style="width: 150px; height: 100px; object-fit: cover;">
+            <h4>${coche.nombre}</h4>
+        `;
+        botonesCoches.appendChild(button);
+    });
+}
+
+
+async function seleccionarCoche(cocheId, cocheNombre) {
+    document.getElementById('detalles-reserva').style.display = 'block';
+    document.getElementById('botones-coches').style.display = 'none';
+
+    const detallesReserva = `
+        <h3>Reserva para ${cocheNombre}</h3>
+    `;
+    document.getElementById('tarifa-detalles').innerHTML = detallesReserva;
+
+    document.getElementById('fecha-inicio').addEventListener('change', () => actualizarPrecio());
+    document.getElementById('fecha-fin').addEventListener('change', () => actualizarPrecio());
+    document.getElementById('seleccionar-tarifa').addEventListener('change', () => actualizarPrecio());
+    document.getElementById('confirmar-reserva').addEventListener('click', () => confirmarReserva(cocheId,cocheNombre));
+}
+
+
+async function obtenerCochePorId(cocheId,cocheNombre) {
+    console.log("Obteniendo coche con ID:", cocheId, cocheNombre);
+    try {
+        const response = await fetch(`http://localhost:5000/vehicles/cars/${cocheId}/${cocheNombre}`);
+        const coche = await response.json();
+        if (!response.ok) {
+            console.log(coche)
+            throw new Error("Coche no encontrado");
+        }
+       
+        console.log("Coche recuperado:", coche); 
+        return coche;
+    } catch (error) {
+        console.error("Error al obtener coche:", error);
+    }
+}
+
+
+async function confirmarReserva(cocheId,cocheNombre) {
+    const fechaInicio = document.getElementById('fecha-inicio').value;
+    const fechaFin = document.getElementById('fecha-fin').value;
+    const tarifaSeleccionada = document.getElementById('seleccionar-tarifa').value;
+    const contratoFile = document.getElementById('contrato-upload').files[0];
+
+    if (!contratoFile || contratoFile.type !== 'application/pdf') {
+        alert("El archivo debe ser un PDF.");
+        return;
+    }
+
+    // Obtén el coche por su ID
+    const coche = await obtenerCochePorId(cocheId,cocheNombre);
+    if (!coche) {
+        alert("No se pudo encontrar los detalles del coche.");
+        return;
+    }
+
+    console.log("Detalles del coche:", coche); 
+
+    const tarifas = coche.vehicle.flatMap(v => v.tariff); 
+    if (!coche.vehicle || coche.vehicle.length === 0) {
+        alert("Este coche no tiene vehículos asociados con tarifas.");
+        return;
+    }
+    if (!tarifas) {
+        alert("Tarifas no disponibles para este vehículo.");
+        return;
+    }
+
+    const tarifa = tarifas.find(t => t.type.toLowerCase().trim() === tarifaSeleccionada.toLowerCase().trim());
+    if (!tarifa) {
+        alert("Tarifa no encontrada.");
+        return;
+    }
+
+    let totalPrice = 0;
+
+    const fechaInicioObj = new Date(fechaInicio);
+    const fechaFinObj = new Date(fechaFin);
+    const diferenciaEnDias = Math.ceil((fechaFinObj - fechaInicioObj) / (1000 * 3600 * 24));
+
+    if (diferenciaEnDias <= 3) {
+        totalPrice = tarifa.prices["1-3_days"] * diferenciaEnDias;
+    } else if (diferenciaEnDias <= 6) {
+        totalPrice = tarifa.prices["4-6_days"] * diferenciaEnDias;
+    } else if (diferenciaEnDias <= 7) {
+        totalPrice = tarifa.prices["7_days"] * diferenciaEnDias;
+    } else {
+        totalPrice = tarifa.prices["1_month"];  
+    }
+
+    totalPrice += tarifa.deposit;
+
+    const formData = new FormData();
+    formData.append("carId", cocheId);
+    formData.append("tariffType", tarifaSeleccionada);
+    formData.append("startDate", fechaInicio);
+    formData.append("endDate", fechaFin);
+    formData.append("contract", contratoFile);
+    formData.append("totalPrice", totalPrice);
+
+    const token = localStorage.getItem('token');
+    try {
+        const response = await fetch('http://localhost:5000/reservations/createReservation', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'x-auth-token': token
+            }
+        });
+
+        if (response.ok) {
+            alert("Reserva realizada correctamente.");
+        } else {
+            const errorData = await response.json(); 
+            console.error("Error en la solicitud:", errorData);
+            alert(errorData.message || "Error en la reserva.");
+            return;
+        }
+    } catch (error) {
+        alert("Error en la reserva.");
+    }
+}

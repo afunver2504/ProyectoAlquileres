@@ -1,349 +1,338 @@
 [
   {
+    "name": "Renault Clio Diesel",
     "category": "Economica",
-    "vehicles": [
+    "tariff": [
       {
-        "name": "Renault Clio Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 35,
-              "4-6_days": 33,
-              "7_days": 31,
-              "1_month": 850
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 50,
-              "4-6_days": 48,
-              "7_days": 40,
-              "1_month": 1100
-            }
-          }
-        ]
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 35,
+          "4-6_days": 33,
+          "7_days": 31,
+          "1_month": 850
+        }
       },
       {
-        "name": "Peugeot 208 Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 35,
-              "4-6_days": 33,
-              "7_days": 31,
-              "1_month": 850
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 50,
-              "4-6_days": 48,
-              "7_days": 40,
-              "1_month": 1100
-            }
-          }
-        ]
-      },
-      {
-        "name": "Opel Corsa Gasolina",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 35,
-              "4-6_days": 33,
-              "7_days": 31,
-              "1_month": 850
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 50,
-              "4-6_days": 48,
-              "7_days": 40,
-              "1_month": 1100
-            }
-          }
-        ]
-      },
-      {
-        "name": "Citroen C3 Biplaza Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 35,
-              "4-6_days": 33,
-              "7_days": 31,
-              "1_month": 850
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 350,
-            "prices": {
-              "1-3_days": 50,
-              "4-6_days": 48,
-              "7_days": 40,
-              "1_month": 1100
-            }
-          }
-        ]
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 50,
+          "4-6_days": 48,
+          "7_days": 40,
+          "1_month": 1100
+        }
       }
     ]
   },
   {
+    "name": "Peugeot 208 Diesel",
+    "category": "Economica",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 35,
+          "4-6_days": 33,
+          "7_days": 31,
+          "1_month": 850
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 50,
+          "4-6_days": 48,
+          "7_days": 40,
+          "1_month": 1100
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opel Corsa Gasolina",
+    "category": "Economica",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 35,
+          "4-6_days": 33,
+          "7_days": 31,
+          "1_month": 850
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 50,
+          "4-6_days": 48,
+          "7_days": 40,
+          "1_month": 1100
+        }
+      }
+    ]
+  },
+  {
+    "name": "Citroen C3 Biplaza Diesel",
+    "category": "Economica",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 35,
+          "4-6_days": 33,
+          "7_days": 31,
+          "1_month": 850
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 350,
+        "prices": {
+          "1-3_days": 50,
+          "4-6_days": 48,
+          "7_days": 40,
+          "1_month": 1100
+        }
+      }
+    ]
+  },
+  {
+    "name": "Citroen C4 Diesel",
     "category": "Gama Media",
-    "vehicles": [
+    "tariff": [
       {
-        "name": "Citroen C4 Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 400,
-            "prices": {
-              "1-3_days": 45,
-              "4-6_days": 43,
-              "7_days": 41,
-              "1_month": 1150
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 400,
-            "prices": {
-              "1-3_days": 60,
-              "4-6_days": 58,
-              "7_days": 50,
-              "1_month": 1400
-            }
-          }
-        ]
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 400,
+        "prices": {
+          "1-3_days": 45,
+          "4-6_days": 43,
+          "7_days": 41,
+          "1_month": 1150
+        }
       },
       {
-        "name": "Seat Leon Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 400,
-            "prices": {
-              "1-3_days": 45,
-              "4-6_days": 43,
-              "7_days": 41,
-              "1_month": 1150
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 400,
-            "prices": {
-              "1-3_days": 60,
-              "4-6_days": 58,
-              "7_days": 50,
-              "1_month": 1400
-            }
-          }
-        ]
-      },
-      {
-        "name": "Ford Focus Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 400,
-            "prices": {
-              "1-3_days": 45,
-              "4-6_days": 43,
-              "7_days": 41,
-              "1_month": 1150
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 400,
-            "prices": {
-              "1-3_days": 60,
-              "4-6_days": 58,
-              "7_days": 50,
-              "1_month": 1400
-            }
-          }
-        ]
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 400,
+        "prices": {
+          "1-3_days": 60,
+          "4-6_days": 58,
+          "7_days": 50,
+          "1_month": 1400
+        }
       }
     ]
   },
   {
+    "name": "Seat Leon Diesel",
+    "category": "Gama Media",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 400,
+        "prices": {
+          "1-3_days": 45,
+          "4-6_days": 43,
+          "7_days": 41,
+          "1_month": 1150
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 400,
+        "prices": {
+          "1-3_days": 60,
+          "4-6_days": 58,
+          "7_days": 50,
+          "1_month": 1400
+        }
+      }
+    ]
+  },
+  {
+    "name": "Ford Focus Diesel",
+    "category": "Gama Media",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 400,
+        "prices": {
+          "1-3_days": 45,
+          "4-6_days": 43,
+          "7_days": 41,
+          "1_month": 1150
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 400,
+        "prices": {
+          "1-3_days": 60,
+          "4-6_days": 58,
+          "7_days": 50,
+          "1_month": 1400
+        }
+      }
+    ]
+  },
+  {
+    "name": "Fiat Tipo Automático Diesel",
     "category": "Business",
-    "vehicles": [
+    "tariff": [
       {
-        "name": "Fiat Tipo Automático Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 55,
-              "4-6_days": 53,
-              "7_days": 51,
-              "1_month": 1450
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 70,
-              "4-6_days": 68,
-              "7_days": 60,
-              "1_month": 1750
-            }
-          }
-        ]
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 55,
+          "4-6_days": 53,
+          "7_days": 51,
+          "1_month": 1450
+        }
       },
       {
-        "name": "Fiat Tipo Manual Gasolina/GLP",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 55,
-              "4-6_days": 53,
-              "7_days": 51,
-              "1_month": 1450
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 70,
-              "4-6_days": 68,
-              "7_days": 60,
-              "1_month": 1750
-            }
-          }
-        ]
-      },
-      {
-        "name": "Opel Insignia Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 55,
-              "4-6_days": 53,
-              "7_days": 51,
-              "1_month": 1450
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 70,
-              "4-6_days": 68,
-              "7_days": 60,
-              "1_month": 1750
-            }
-          }
-        ]
-      },
-      {
-        "name": "Ford C-MAX Gasolina",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "100km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 55,
-              "4-6_days": 53,
-              "7_days": 51,
-              "1_month": 1450
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 70,
-              "4-6_days": 68,
-              "7_days": 60,
-              "1_month": 1750
-            }
-          }
-        ]
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 70,
+          "4-6_days": 68,
+          "7_days": 60,
+          "1_month": 1750
+        }
       }
     ]
   },
   {
-    "category": "Gran Turismo",
-    "vehicles": [
+    "name": "Fiat Tipo Manual Gasolina/GLP",
+    "category": "Business",
+    "tariff": [
       {
-        "name": "Land Rover con bola 300CV Diesel",
-        "tariff": [
-          {
-            "type": "Básica",
-            "mileage": "350km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 140,
-              "4-6_days": 140,
-              "7_days": 140,
-              "1_month": 4340
-            }
-          },
-          {
-            "type": "Plus",
-            "mileage": "350km",
-            "deposit": 450,
-            "prices": {
-              "1-3_days": 140,
-              "4-6_days": 140,
-              "7_days": 140,
-              "1_month": 4340
-            }
-          }
-        ]
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 55,
+          "4-6_days": 53,
+          "7_days": 51,
+          "1_month": 1450
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 70,
+          "4-6_days": 68,
+          "7_days": 60,
+          "1_month": 1750
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opel Insignia Diesel",
+    "category": "Business",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 55,
+          "4-6_days": 53,
+          "7_days": 51,
+          "1_month": 1450
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 70,
+          "4-6_days": 68,
+          "7_days": 60,
+          "1_month": 1750
+        }
+      }
+    ]
+  },
+  {
+    "name": "Ford C-MAX Gasolina",
+    "category": "Business",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "100km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 55,
+          "4-6_days": 53,
+          "7_days": 51,
+          "1_month": 1450
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 70,
+          "4-6_days": 68,
+          "7_days": 60,
+          "1_month": 1750
+        }
+      }
+    ]
+  },
+  {
+    "name": "Land Rover con bola 300CV Diesel",
+    "category": "Gran Turismo",
+    "tariff": [
+      {
+        "type": "Básica",
+        "mileage": "350km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 140,
+          "4-6_days": 140,
+          "7_days": 140,
+          "1_month": 4340
+        }
+      },
+      {
+        "type": "Plus",
+        "mileage": "350km",
+        "deposit": 450,
+        "prices": {
+          "1-3_days": 140,
+          "4-6_days": 140,
+          "7_days": 140,
+          "1_month": 4340
+        }
       }
     ]
   }
 ]
-
-
-

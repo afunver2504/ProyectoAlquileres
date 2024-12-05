@@ -20,11 +20,10 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-
 // Ruta para crear una reserva
 router.post('/createReservation', verificarToken, upload.single('contract'), async (req, res) => {
     try {
-        const { carId, tariffType, startDate, endDate} = req.body;
+        const { carId, tariffType, startDate, endDate } = req.body;
 
         if (!carId || !tariffType || !startDate || !endDate || !req.file) {
             return res.status(400).json({ message: 'Faltan campos obligatorios.' });
@@ -34,21 +33,20 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
             return res.status(400).json({ message: 'El archivo debe ser un PDF.' });
         }
 
-        const startDateParsed = new Date(startDate);
-        const endDateParsed = new Date(endDate);
-        if (isNaN(startDateParsed) || isNaN(endDateParsed) || startDateParsed >= endDateParsed) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+
+        if (isNaN(start) || isNaN(end) || start >= end) {
             return res.status(400).json({ message: 'Las fechas no son válidas.' });
         }
 
-        const diasReserva = (endDateParsed - startDateParsed) / (1000 * 3600 * 24);
+        const diasReserva = (end - start) / (1000 * 3600 * 24);
 
-        // Buscar el coche en la base de datos
         const car = await Vehicle.findById(carId);
         if (!car) {
-            return res.status(400).json({ message: 'Coche no encontrado.' });
+            return res.status(404).json({ message: 'Vehículo no encontrado.' });
         }
 
-        // Obtener la tarifa seleccionada
         const tariff = car.tariff.find(t => t.type.toLowerCase().trim() === tariffType.toLowerCase().trim());
         if (!tariff) {
             return res.status(400).json({ message: 'Tarifa no encontrada para este vehículo.' });
@@ -71,14 +69,14 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
         }
 
         const totalPrice = dailyPrice * diasReserva;
-        const fianza = tariff.deposit; // Fianza basada en la tarifa seleccionada
+        const fianza = tariff.deposit;
 
         // Crear la nueva reserva
         const newReservation = new Reservation({
             userId: req.user._id,
             carId,
             tariffType,
-            selectedDates: [startDateParsed, endDateParsed],
+            selectedDates: [start, end],
             totalPrice,
             fianza,
             contractPDF: req.file.path
@@ -86,13 +84,13 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
 
         await newReservation.save();
         res.status(201).json({ message: 'Reserva creada exitosamente.' });
-
     } catch (error) {
-        console.error(error);
+        console.error('Error al crear la reserva:', error);
         res.status(500).json({ message: 'Error al crear la reserva.', error });
     }
 });
 
-
 module.exports = router;
+
+
 
