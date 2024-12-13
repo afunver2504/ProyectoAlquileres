@@ -155,14 +155,12 @@ const translations = {
     }
 };
 
-// Función que cambia el idioma de los textos en la página
 function changeLanguage(language) {
     const elements = document.querySelectorAll("[id], [name]");
 
     elements.forEach(element => {
         const id = element.id || element.name;
 
-        // Actualiza el texto si tiene un id o name que corresponde
         if (translations[language][id]) {
             if (element.id || element.name) {
                 element.textContent = translations[language][id];
@@ -171,7 +169,6 @@ function changeLanguage(language) {
     });
 }
 
-// Detectar el cambio de idioma desde el menú
 document.querySelectorAll("#language-list li").forEach(item => {
     item.addEventListener("click", function () {
         const selectedLang = this.getAttribute("data-lang");
@@ -179,10 +176,8 @@ document.querySelectorAll("#language-list li").forEach(item => {
     });
 });
 
-// Por defecto, configurar el idioma en español
 changeLanguage("es");
 
-//Funcion para el inicio de sesion
 document.getElementById('login-btn').addEventListener('click', async function (event) {
     event.preventDefault();
 
@@ -215,6 +210,7 @@ document.getElementById('login-btn').addEventListener('click', async function (e
         if (response.ok && data.token) {
             localStorage.setItem('token', data.token);
             localStorage.setItem('nombreUsuario', data.nombre);
+            localStorage.setItem('userId', data.userId);
             window.location.href = "paginaWeb.html";
         } else {
             alert(data.mensaje || 'Datos incorrectos o usuario no encontrado');
@@ -226,13 +222,11 @@ document.getElementById('login-btn').addEventListener('click', async function (e
 });
 
 
-// Función para abrir el formulario de registro
 document.getElementById('register-button').addEventListener('click', function () {
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('register-form').style.display = 'block';
 });
 
-// Función para volver al formulario de inicio de sesión
 document.getElementById('back-button').addEventListener('click', function () {
     document.getElementById('register-form').style.display = 'none';
     document.getElementById('login-form').style.display = 'block';
@@ -253,7 +247,6 @@ document.getElementById('register-form').addEventListener('submit', function (e)
     const contraseña = document.getElementById('contraseña').value;
     const confirmarContraseña = document.getElementById('confirmarContraseña').value;
 
-    // Enviar la solicitud de registro
     fetch('/api/registrar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

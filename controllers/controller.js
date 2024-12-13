@@ -163,14 +163,12 @@ async function obtenerCochePorId(req, res) {
     try {
         const cocheId = req.params.id;
 
-        // Busca el coche directamente por su ID
         const coche = await Vehicle.findById(cocheId);
 
         if (!coche) {
             return res.status(404).json({ message: 'Coche no encontrado.' });
         }
 
-        // Responde con el documento del coche encontrado
         res.json(coche);  
     } catch (error) {
         console.error('Error al obtener coche:', error);

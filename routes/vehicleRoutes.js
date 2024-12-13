@@ -46,7 +46,6 @@ router.post('/reserveVehicle', async (req, res) => {
     }
 });
 
-// Ruta para obtener un vehículo por ID
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
 

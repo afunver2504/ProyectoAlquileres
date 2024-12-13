@@ -273,9 +273,7 @@ function mostrarContenido(opcion) {
                         </div>
                     `;
 
-            // Función para descargar el contrato PDF
             document.getElementById('descargar-contrato').addEventListener('click', function () {
-                // El archivo PDF se encuentra en la carpeta /public/contrato
                 const contratoUrl = "contrato/MODELO FORMULARIO ALQUILER CONVENCIONAL.pdf";
                 window.location.href = contratoUrl;  
             });
@@ -305,9 +303,6 @@ function mostrarContenido(opcion) {
                         <label for="fecha-fin">Fecha de fin:</label>
                         <input type="date" id="fecha-fin" />
                     
-                        <!-- Mostrar precio dependiendo de la tarifa -->
-                        <div id="precio-reserva">Precio: <span id="precio-tarifa">0</span>€</div>
-                    
                         <label for="contrato-upload">Sube tu contrato firmado (PDF):</label>
                         <input type="file" id="contrato-upload" accept=".pdf" />
                         <button id="confirmar-reserva">Confirmar Reserva</button>
@@ -316,13 +311,14 @@ function mostrarContenido(opcion) {
             renderCochesReserva();
             break;
 
-        case 'tus-reservas':
-            contenido.innerHTML = `
-                    <h2>Tus Reservas</h2>
-                    <p>Visualiza tus reservas realizadas aquí.</p>
-                    <div id="lista-reservas"></div>
+            case 'tus-reservas':
+                contenido.innerHTML = `
+                    <h2 style="text-align: center; color: #2c3e50;">Tus Reservas</h2>
+                    <p style="text-align: center; color: #555; margin-bottom: 20px;">Visualiza tus reservas realizadas aquí.</p>
+                    <div id="lista-reservas" class="reservas-contenedor"></div>
                 `;
-            break;
+                renderTusReservas(); 
+                break;
         default:
             contenido.innerHTML = '<p>Descripción inicial (Lorem ipsum)</p>';
             break;
@@ -336,9 +332,12 @@ function mostrarContenido(opcion) {
 
 function renderCategoria(nombre, fianza, vehiculos, tarifas) {
     const vehiculosHtml = vehiculos.map(v => `
-        <li onclick="mostrarDetalles('${v._id}', '${v.nombre}', '${v.descripcion}', '${v.imagen}')"></li>
+        <li onclick="mostrarDetalles('${v._id}', '${v.nombre}', '${v.descripcion}', '${v.imagen}')">
+            <img src="${v.imagen}" alt="${v.nombre}" style="width: 150px; height: 100px; object-fit: cover;">
+            <h4>${v.nombre}</h4>
+            <p>${v.descripcion}</p>
+        </li>
     `).join('');
-
 
     const tarifasHtml = tarifas.map(t => `
         <tr>
@@ -352,8 +351,8 @@ function renderCategoria(nombre, fianza, vehiculos, tarifas) {
         <div class="categoria">
             <h3>${nombre}</h3>
             <p>Fianza: ${fianza}€</p>
-            <ul>${vehiculosHtml}</ul>
-            <table>
+            <ul class="vehiculos">${vehiculosHtml}</ul>
+            <table class="tarifas">
                 <thead>
                     <tr>
                         <th>Días</th>
@@ -366,6 +365,7 @@ function renderCategoria(nombre, fianza, vehiculos, tarifas) {
         </div>
     `;
 }
+
 
 function mostrarDetalles(id, nombre, descripcion, imagen) {
     const modal = document.createElement('div');
@@ -398,11 +398,12 @@ async function renderCochesReserva() {
         botonesCoches.innerHTML = '';
 
         coches.forEach(coche => {
+            const imagenCoche = obtenerRutaImagen(coche.name);
             const button = document.createElement("button");
             button.classList.add("boton-coche");
             button.onclick = () => seleccionarCoche(coche._id, coche.name);
             button.innerHTML = `
-                <img src="${coche.image}" alt="${coche.name}" style="width: 150px; height: 100px; object-fit: cover;">
+                <img src="${imagenCoche}" style="width: 150px; height: 100px; object-fit: cover;">
                 <h4>${coche.name}</h4>
             `;
             botonesCoches.appendChild(button);
@@ -413,6 +414,24 @@ async function renderCochesReserva() {
     }
 }
 
+function obtenerRutaImagen(nombreCoche) {
+    const imagenes = {
+        "Renault Clio Diesel": "image/RenaultClioDiesel.jfif",
+        "Peugeot 208 Diesel": "image/Peugeot208Diesel.jfif",
+        "Opel Corsa Gasolina": "image/OpelCorsaGasolina.webp",
+        "Citroen C3 Biplaza Diesel": "image/CitroenC3BiplazaDiesel.jpg",
+        "Citroen C4 Diesel": "image/Citroen C4 Diesel.jfif",
+        "Seat Leon Diesel": "image/Seat Leon Diesel.jpg",
+        "Ford Focus Diesel": "image/Ford Focus Diesel.jfif",
+        "Fiat Tipo Automático Diesel": "image/Fiat Tipo Automático Diesel.webp",
+        "Fiat Tipo Manual Gasolina/GLP": "image/Fiat Tipo Manual Gasolina.jpg",
+        "Opel Insignia Diesel": "image/Opel Insignia Diesel.webp",
+        "Ford C-MAX Gasolina": "image/Ford C-MAX Gasolina.jpg",
+        "Land Rover con bola 300CV Diesel": "image/Land Rover.jfif"
+    };
+
+    return imagenes[nombreCoche]
+}
 
 async function seleccionarCoche(cocheId, cocheNombre) {
     try {
@@ -422,15 +441,11 @@ async function seleccionarCoche(cocheId, cocheNombre) {
             throw new Error('Error al obtener los detalles del coche.');
         }
         
-        const cocheDetalles = await response.json();
-
         document.getElementById('detalles-reserva').style.display = 'block';
         document.getElementById('botones-coches').style.display = 'none';
 
         const detallesReserva = `
             <h3>Reserva para ${cocheNombre}</h3>
-            <p>Modelo: ${cocheDetalles.model}</p>
-            <p>Precio Base: ${cocheDetalles.price} €</p>
         `;
         document.getElementById('tarifa-detalles').innerHTML = detallesReserva;
 
@@ -517,8 +532,6 @@ async function obtenerCochePorId(cocheId) {
     }
 }
 
-
-
 async function confirmarReserva(cocheId) {
     const fechaInicio = document.getElementById('fecha-inicio').value;
     const fechaFin = document.getElementById('fecha-fin').value;
@@ -590,24 +603,105 @@ async function confirmarReserva(cocheId) {
     }
 }
 
+async function renderTusReservas() {
+    try {
+        const userId = localStorage.getItem('userId');
+        
+        console.log('ID de usuario obtenido:', userId);
+
+        if (!userId) {
+            throw new Error('No se encontró el ID del usuario en la sesión.');
+        }
+
+        const response = await fetch('http://localhost:5000/reservations/userReservations', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': localStorage.getItem('token')
+            },
+        });
+        const listaReservas = document.getElementById('lista-reservas');
+        if (!listaReservas) {
+            throw new Error("Elemento 'lista-reservas' no encontrado.");
+        }
+
+        listaReservas.innerHTML = ''; 
+
+        if (!response.ok) {
+            if (response.status === 404) {
+                listaReservas.innerHTML = `
+                    <div class="sin-reservas">
+                        <p style="text-align: center; color: #555; margin-bottom: 20px;">Actualmente no tienes reservas realizadas.</p>
+                        <p style="text-align: center; color: #555; margin-bottom: 20px;">¡Anímate a reservar tu vehículo favorito!</p>
+                        <img src="image/caraTrostre.png" alt="Sin reservas" style="display: block; margin: 0 auto; width: 100px;">
+                    </div>
+                `;
+                return;
+            }
+            throw new Error('Error al obtener las reservas.');
+        }
+
+        const reservas = await response.json();
+
+        reservas.forEach(reserva => {
+            const imagenCoche = obtenerRutaImagen(reserva.nombreVehiculo);
+            const reservaHTML = `
+                <div class="reserva-item">
+                    <div class="reserva-detalle">
+                        <h3>${reserva.nombreVehiculo}</h3>
+                        <p><strong>Desde:</strong> ${new Date(reserva.fechaInicio).toLocaleDateString()}</p>
+                        <p><strong>Hasta:</strong> ${new Date(reserva.fechaFin).toLocaleDateString()}</p>
+                        <p><strong>Precio total:</strong> ${reserva.totalPrice}€</p>
+                        <p><strong>Fianza:</strong> ${reserva.fianza}€</p>
+                        <a href="${reserva.contratoPDF}" target="_blank" class="ver-contrato">Ver contrato (PDF)</a>
+                    </div>
+                    <div class="reserva-imagen">
+                        <img src="${imagenCoche}" alt="${reserva.nombreVehiculo}" class="imagen-coche">
+                    </div>
+                    <div class="reserva-acciones">
+                        <button class="boton-cancelar" onclick="cancelarReserva('${reserva._id}')">Cancelar reserva</button>
+                    </div>
+                </div>
+            `;
+            listaReservas.innerHTML += reservaHTML;
+        });
+    } catch (error) {
+        console.error("Error al cargar las reservas:", error);
+        alert("No se pudieron cargar las reservas.");
+    }
+}
+
+async function cancelarReserva(reservaId) {
+    if (confirm('¿Estás seguro de que deseas cancelar esta reserva?')) {
+        try {
+            const response = await fetch(`http://localhost:5000/reservations/${reservaId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': localStorage.getItem('token'),
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cancelar la reserva.');
+            }
+
+            alert('Reserva cancelada con éxito.');
+
+            await renderTusReservas();
+
+        } catch (error) {
+            console.error('Error al cancelar la reserva:', error);
+            alert('No se pudo cancelar la reserva.');
+        }
+    }
+}
+
+
 
 function cerrarModal() {
     const modal = document.querySelector('.modal');
     if (modal) modal.remove();
-}
-
-function initCalendar(reservedDates) {
-    const calendarEl = document.getElementById("calendar");
-
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: "dayGridMonth",
-        events: reservedDates,
-        dateClick: function (info) {
-            alert("Fecha seleccionada: " + info.dateStr);
-        },
-    });
-
-    calendar.render();
 }
 
 function toggleMenu() {
@@ -644,9 +738,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const data = await response.json();
 
     if (response.status === 200 && data.mensaje) {
-        const usuarioNombreDiv = document.getElementById('usuarioNombre');
-        usuarioNombreDiv.textContent = `Usuario: ${data.mensaje}`;
-        alert('Error al cargar los datos del usuario');
+
         window.location.href = '/login';
     }
 });

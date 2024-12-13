@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Ruta para crear una reserva
+
 router.post('/createReservation', verificarToken, upload.single('contract'), async (req, res) => {
     try {
         const { carId, tariffType, startDate, endDate } = req.body;
@@ -52,7 +52,6 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
             return res.status(400).json({ message: 'Tarifa no encontrada para este vehículo.' });
         }
 
-        // Calcular el precio de la reserva basado en la duración
         let dailyPrice = 0;
         if (diasReserva >= 1 && diasReserva <= 3) {
             dailyPrice = tariff.prices["1-3_days"];
@@ -71,7 +70,7 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
         const totalPrice = dailyPrice * diasReserva;
         const fianza = tariff.deposit;
 
-        // Crear la nueva reserva
+       
         const newReservation = new Reservation({
             userId: req.user._id,
             carId,
@@ -89,6 +88,81 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
         res.status(500).json({ message: 'Error al crear la reserva.', error });
     }
 });
+
+router.get('/userReservations', verificarToken, async (req, res) => {
+    console.log('Ruta /userReservations alcanzada');
+    try {
+        const userId = req.user._id;
+
+        const reservas = await Reservation.find({ userId }).populate('carId');
+        if (reservas.length === 0) {
+            return res.status(404).json({ message: 'No tienes reservas.' });
+        }
+
+        const reservasDetalles = await Promise.all(
+            reservas.map(async reserva => {
+                const car = await Vehicle.findById(reserva.carId);
+                return {
+                    _id: reserva._id,
+                    nombreVehiculo: car ? car.name : 'Vehículo desconocido',
+                    fechaInicio: reserva.selectedDates[0],
+                    fechaFin: reserva.selectedDates[1],
+                    totalPrice: reserva.totalPrice,
+                    fianza: reserva.fianza,
+                    contratoPDF: reserva.contractPDF
+                };
+            })
+        );
+
+        res.json(reservasDetalles);
+    } catch (error) {
+        console.error('Error al obtener reservas:', error);
+        res.status(500).json({ message: 'Error al obtener las reservas.' });
+    }
+});
+
+router.get('/:id', verificarToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const reserva = await Reservation.findById(id).populate('carId');
+
+        if (!reserva) {
+            return res.status(404).json({ message: 'Reserva no encontrada.' });
+        }
+
+        const car = reserva.carId;
+
+        res.json({
+            _id: reserva._id,
+            nombreVehiculo: car.name,
+            categoriaVehiculo: car.category,
+            fechaInicio: reserva.selectedDates[0],
+            fechaFin: reserva.selectedDates[1],
+            totalPrice: reserva.totalPrice,
+            fianza: reserva.fianza,
+            contratoPDF: reserva.contractPDF
+        });
+    } catch (error) {
+        console.error('Error al obtener detalles de la reserva:', error);
+        res.status(500).json({ message: 'Error al obtener detalles de la reserva.' });
+    }
+});
+
+
+router.delete('/:id', verificarToken, async (req, res) => {
+    try {
+        const reserva = await Reservation.findByIdAndDelete(req.params.id);
+        if (!reserva) {
+            return res.status(404).json({ mensaje: 'Reserva no encontrada.' });
+        }
+
+        res.status(200).json({ mensaje: 'Reserva eliminada con éxito.' });
+    } catch (error) {
+        console.error('Error al eliminar la reserva:', error);
+        res.status(500).json({ mensaje: 'Error al eliminar la reserva.' });
+    }
+});
+
 
 module.exports = router;
 
