@@ -53,24 +53,35 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
         }
 
         let dailyPrice = 0;
+        let totalPrice = 0;
+        let sumDays = 0;
+
         if (diasReserva >= 1 && diasReserva <= 3) {
             dailyPrice = tariff.prices["1-3_days"];
+            totalPrice = dailyPrice * diasReserva;
         } else if (diasReserva >= 4 && diasReserva <= 6) {
             dailyPrice = tariff.prices["4-6_days"];
-        } else if (diasReserva === 7) {
+            totalPrice = dailyPrice * diasReserva;
+        } else if (diasReserva >= 7 && diasReserva <= 30) {
             dailyPrice = tariff.prices["7_days"];
-        } else if (diasReserva >= 30) {
+            totalPrice = dailyPrice * diasReserva;
+        } else if (diasReserva === 31) {
             dailyPrice = tariff.prices["1_month"];
+            totalPrice = dailyPrice * 1
+        } else if (diasReserva >= 32) {
+            sumDays = diasReserva;
+            dailyPrice = tariff.prices["1_month"] / 31;
+            dailyPrice = Math.round(dailyPrice * 100) / 100;
+            totalPrice = tariff.prices["1_month"] + ((sumDays - 31) * dailyPrice);
+            totalPrice = Math.round(totalPrice * 100) / 100;
         }
 
         if (dailyPrice === 0) {
             return res.status(400).json({ message: 'La duración de la reserva no es válida.' });
         }
 
-        const totalPrice = dailyPrice * diasReserva;
         const fianza = tariff.deposit;
 
-       
         const newReservation = new Reservation({
             userId: req.user._id,
             carId,

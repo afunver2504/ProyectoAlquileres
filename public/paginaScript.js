@@ -78,10 +78,10 @@ function mostrarContenido(opcion) {
         <p style="text-align: center; color: #555; margin-bottom: 20px;">Explora nuestra amplia gama de vehículos y selecciona el que mejor se adapte a tus necesidades.</p>
         <div class="categorias">
             ${renderCategoria("Económica", 350, [
-                    { _id: "673e1afbc675a2d23d31ae4c", nombre: "Renault Clio Diesel", imagen: "image/RenaultClioDiesel.jfif", descripcion: "Compacto y económico, ideal para ciudad." },
-                    { _id: "673e1afbc675a2d23d31ae4c", nombre: "Peugeot 208 Diesel", imagen: "image/Peugeot208Diesel.jfif", descripcion: "Ágil y eficiente, perfecto para trayectos cortos." },
-                    { _id: "673e1afbc675a2d23d31ae4c", nombre: "Opel Corsa Gasolina", imagen: "image/OpelCorsaGasolina.webp", descripcion: "Compacto con diseño moderno y versátil." },
-                    { _id: "673e1afbc675a2d23d31ae4c", nombre: "Citroen C3 Biplaza Diesel", imagen: "image/CitroenC3BiplazaDiesel.jpg", descripcion: "Diseño único, ideal para parejas o pequeños grupos." },
+                    { _id: "67518fb67d4694257445cbee", nombre: "Renault Clio Diesel", imagen: "image/RenaultClioDiesel.jfif", descripcion: "Compacto y económico, ideal para ciudad." },
+                    { _id: "67518fb67d4694257445cbef", nombre: "Peugeot 208 Diesel", imagen: "image/Peugeot208Diesel.jfif", descripcion: "Ágil y eficiente, perfecto para trayectos cortos." },
+                    { _id: "67518fb67d4694257445cbf0", nombre: "Opel Corsa Gasolina", imagen: "image/OpelCorsaGasolina.webp", descripcion: "Compacto con diseño moderno y versátil." },
+                    { _id: "67518fb67d4694257445cbf1", nombre: "Citroen C3 Biplaza Diesel", imagen: "image/CitroenC3BiplazaDiesel.jpg", descripcion: "Diseño único, ideal para parejas o pequeños grupos." },
                 ], [
                     { dias: "1-3 días", tarifaBasica: 35, tarifaPlus: 50 },
                     { dias: "4-6 días", tarifaBasica: 33, tarifaPlus: 48 },
@@ -90,9 +90,9 @@ function mostrarContenido(opcion) {
                 ])}
         
         ${renderCategoria("Gama Media", 400, [
-                    { _id: "673e1afbc675a2d23d31ae4d", nombre: "Citroen C4 Diesel", imagen: "image/Citroen C4 Diesel.jfif", descripcion: "Espacioso y cómodo para viajes largos." },
-                    { _id: "673e1afbc675a2d23d31ae4d", nombre: "Seat Leon Diesel", imagen: "image/Seat Leon Diesel.jpg", descripcion: "Un clásico confiable para cualquier ocasión." },
-                    { _id: "673e1afbc675a2d23d31ae4d", nombre: "Ford Focus Diesel", imagen: "image/Ford Focus Diesel.jfif", descripcion: "Equilibrio perfecto entre comodidad y eficiencia." },
+                    { _id: "67518fb67d4694257445cbf2", nombre: "Citroen C4 Diesel", imagen: "image/Citroen C4 Diesel.jfif", descripcion: "Espacioso y cómodo para viajes largos." },
+                    { _id: "67518fb67d4694257445cbf3", nombre: "Seat Leon Diesel", imagen: "image/Seat Leon Diesel.jpg", descripcion: "Un clásico confiable para cualquier ocasión." },
+                    { _id: "67518fb67d4694257445cbf4", nombre: "Ford Focus Diesel", imagen: "image/Ford Focus Diesel.jfif", descripcion: "Equilibrio perfecto entre comodidad y eficiencia." },
                 ], [
                     { dias: "1-3 días", tarifaBasica: 45, tarifaPlus: 60 },
                     { dias: "4-6 días", tarifaBasica: 43, tarifaPlus: 58 },
@@ -101,10 +101,10 @@ function mostrarContenido(opcion) {
                 ])}
 
         ${renderCategoria("Business", 450, [
-                    { _id: "673e1afbc675a2d23d31ae4e", nombre: "Fiat Tipo Automático Diesel", imagen: "image/Fiat Tipo Automático Diesel.webp", descripcion: "Diseño elegante y excelente eficiencia." },
-                    { _id: "673e1afbc675a2d23d31ae4e", nombre: "Fiat Tipo Manual Gasolina/GLP", imagen: "image/Fiat Tipo Manual Gasolina.jpg", descripcion: "Versátil y económico, adaptado a tus necesidades." },
-                    { _id: "673e1afbc675a2d23d31ae4e", nombre: "Opel Insignia Diesel", imagen: "image/Opel Insignia Diesel.webp", descripcion: "Lujo y potencia para un viaje cómodo." },
-                    { _id: "673e1afbc675a2d23d31ae4e", nombre: "Ford C-MAX Gasolina", imagen: "image/Ford C-MAX Gasolina.jpg", descripcion: "Espacioso y dinámico, ideal para familias." },
+                    { _id: "67518fb67d4694257445cbf5", nombre: "Fiat Tipo Automático Diesel", imagen: "image/Fiat Tipo Automático Diesel.webp", descripcion: "Diseño elegante y excelente eficiencia." },
+                    { _id: "67518fb67d4694257445cbf6", nombre: "Fiat Tipo Manual Gasolina/GLP", imagen: "image/Fiat Tipo Manual Gasolina.jpg", descripcion: "Versátil y económico, adaptado a tus necesidades." },
+                    { _id: "67518fb67d4694257445cbf7", nombre: "Opel Insignia Diesel", imagen: "image/Opel Insignia Diesel.webp", descripcion: "Lujo y potencia para un viaje cómodo." },
+                    { _id: "67518fb67d4694257445cbf8", nombre: "Ford C-MAX Gasolina", imagen: "image/Ford C-MAX Gasolina.jpg", descripcion: "Espacioso y dinámico, ideal para familias." },
                 ], [
                     { dias: "1-3 días", tarifaBasica: 55, tarifaPlus: 70 },
                     { dias: "4-6 días", tarifaBasica: 53, tarifaPlus: 68 },
@@ -113,7 +113,7 @@ function mostrarContenido(opcion) {
                 ])}
         
         ${renderCategoria("Gran Turismo", 450, [
-                    { _id: "673e1afbc675a2d23d31ae4f", nombre: "Land Rover con bola 300CV Diesel", imagen: "image/Land Rover.jfif", descripcion: "Potencia y lujo, perfecto para grandes desafíos." },
+                    { _id: "67518fb67d4694257445cbf9", nombre: "Land Rover con bola 300CV Diesel", imagen: "image/Land Rover.jfif", descripcion: "Potencia y lujo, perfecto para grandes desafíos." },
                 ], [
                     { dias: "Por día", tarifaBasica: 140 },
                 ])}
@@ -275,7 +275,7 @@ function mostrarContenido(opcion) {
 
             document.getElementById('descargar-contrato').addEventListener('click', function () {
                 const contratoUrl = "contrato/MODELO FORMULARIO ALQUILER CONVENCIONAL.pdf";
-                window.location.href = contratoUrl;  
+                window.location.href = contratoUrl;
             });
 
             break;
@@ -311,14 +311,14 @@ function mostrarContenido(opcion) {
             renderCochesReserva();
             break;
 
-            case 'tus-reservas':
-                contenido.innerHTML = `
+        case 'tus-reservas':
+            contenido.innerHTML = `
                     <h2 style="text-align: center; color: #2c3e50;">Tus Reservas</h2>
                     <p style="text-align: center; color: #555; margin-bottom: 20px;">Visualiza tus reservas realizadas aquí.</p>
                     <div id="lista-reservas" class="reservas-contenedor"></div>
                 `;
-                renderTusReservas(); 
-                break;
+            renderTusReservas();
+            break;
         default:
             contenido.innerHTML = '<p>Descripción inicial (Lorem ipsum)</p>';
             break;
@@ -333,7 +333,7 @@ function mostrarContenido(opcion) {
 function renderCategoria(nombre, fianza, vehiculos, tarifas) {
     const vehiculosHtml = vehiculos.map(v => `
         <li onclick="mostrarDetalles('${v._id}', '${v.nombre}', '${v.descripcion}', '${v.imagen}')">
-            <img src="${v.imagen}" alt="${v.nombre}" style="width: 150px; height: 100px; object-fit: cover;">
+            <img src="${v.imagen}" alt="${v.nombre}" class="imagen-coche">
             <h4>${v.nombre}</h4>
             <p>${v.descripcion}</p>
         </li>
@@ -350,7 +350,6 @@ function renderCategoria(nombre, fianza, vehiculos, tarifas) {
     return `
         <div class="categoria">
             <h3>${nombre}</h3>
-            <p>Fianza: ${fianza}€</p>
             <ul class="vehiculos">${vehiculosHtml}</ul>
             <table class="tarifas">
                 <thead>
@@ -360,26 +359,126 @@ function renderCategoria(nombre, fianza, vehiculos, tarifas) {
                         <th>Tarifa Plus</th>
                     </tr>
                 </thead>
-                <tbody>${tarifasHtml}</tbody>
+                <tbody>
+                    ${tarifasHtml}
+                    <tr>
+                        <td colspan="3" class="fianza">Fianza: ${fianza}€</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     `;
 }
 
 
-function mostrarDetalles(id, nombre, descripcion, imagen) {
+function mostrarDetalles(_id, nombre, descripcion, imagen) {
+    const detallesCoche = {
+        "67518fb67d4694257445cbee": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Manual",
+            color: "Rojo"
+        },
+        "67518fb67d4694257445cbef": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Manual",
+            color: "Blanco"
+        },
+        "67518fb67d4694257445cbf0": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Gasolina",
+            transmision: "Manual",
+            color: "Azul"
+        },
+        "67518fb67d4694257445cbf1": {
+            puertas: 3,
+            asientos: 2,
+            combustible: "Diesel",
+            transmision: "Manual",
+            color: "Negro"
+        },
+        "67518fb67d4694257445cbf2": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Automática",
+            color: "Blanco"
+        },
+        "67518fb67d4694257445cbf3": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Manual",
+            color: "Rojo"
+        },
+        "67518fb67d4694257445cbf4": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Automática",
+            color: "Negro"
+        },
+        "67518fb67d4694257445cbf5": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Automática",
+            color: "Rojo"
+        },
+        "67518fb67d4694257445cbf6": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Gasolina/GLP",
+            transmision: "Manual",
+            color: "Negro"
+        },
+        "67518fb67d4694257445cbf7": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Automática",
+            color: "Negro"
+        },
+        "67518fb67d4694257445cbf8": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Gasolina",
+            transmision: "Automática",
+            color: "Blanco"
+        },
+        "67518fb67d4694257445cbf9": {
+            puertas: 5,
+            asientos: 5,
+            combustible: "Diesel",
+            transmision: "Manual",
+            color: "Blanco"
+        }
+    };
+
+    const detalles = detallesCoche[_id] || {};
+
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML = `
         <div class="modal-content">
             <h2>${nombre}</h2>
-            <p>${descripcion}</p>
             <img src="${imagen}" alt="${nombre}" />
+            <p><strong>Descripción:</strong> ${descripcion}</p>
+            <div class="detalles-coche">
+                <p><strong>Puertas:</strong> ${detalles.puertas || 'N/A'}</p>
+                <p><strong>Asientos:</strong> ${detalles.asientos || 'N/A'}</p>
+                <p><strong>Combustible:</strong> ${detalles.combustible || 'N/A'}</p>
+                <p><strong>Transmisión:</strong> ${detalles.transmision || 'N/A'}</p>
+                <p><strong>Color:</strong> ${detalles.color || 'N/A'}</p>
+            </div>
             <button onclick="cerrarModal()">Cerrar</button>
         </div>
     `;
     document.body.appendChild(modal);
-
 }
 
 async function renderCochesReserva() {
@@ -436,11 +535,11 @@ function obtenerRutaImagen(nombreCoche) {
 async function seleccionarCoche(cocheId, cocheNombre) {
     try {
         const response = await fetch(`http://localhost:5000/vehicles/${cocheId}`);
-        
+
         if (!response.ok) {
             throw new Error('Error al obtener los detalles del coche.');
         }
-        
+
         document.getElementById('detalles-reserva').style.display = 'block';
         document.getElementById('botones-coches').style.display = 'none';
 
@@ -486,14 +585,27 @@ function actualizarPrecio(car) {
         }
 
         let precioDiario = 0;
+        let precioTotal = 0;
+        let totalDays = 0;
+
         if (diasReserva >= 1 && diasReserva <= 3) {
             precioDiario = tarifa.prices["1-3_days"];
+            precioTotal = precioDiario * diasReserva;
         } else if (diasReserva >= 4 && diasReserva <= 6) {
             precioDiario = tarifa.prices["4-6_days"];
-        } else if (diasReserva === 7) {
+            precioTotal = precioDiario * diasReserva;
+        } else if (diasReserva >= 7 && diasReserva < 31) {
             precioDiario = tarifa.prices["7_days"];
-        } else if (diasReserva >= 30) {
+            precioTotal = precioDiario * diasReserva;
+        } else if (diasReserva === 31) {
             precioDiario = tarifa.prices["1_month"];
+            precioTotal = precioDiario;
+        } else if (diasReserva >= 32) {
+            totalDays = diasReserva;
+            precioDiario = tarifa.prices["1_month"] / 31;
+            precioDiario = Math.round(precioDiario * 100) / 100;
+            precioTotal = tarifa.prices["1_month"] + ((totalDays - 31) * precioDiario);
+            precioTotal = Math.round(precioTotal * 100) / 100;
         }
 
         if (precioDiario === 0) {
@@ -501,7 +613,6 @@ function actualizarPrecio(car) {
             return;
         }
 
-        const precioTotal = precioDiario * diasReserva;
         document.getElementById('precio-tarifa').innerText = `${precioTotal}`;
     }
 }
@@ -556,6 +667,8 @@ async function confirmarReserva(cocheId) {
     }
 
     let totalPrice = 0;
+    let precioVariante = 0;
+    let diasTotales = 0;
 
     const fechaInicioObj = new Date(fechaInicio);
     const fechaFinObj = new Date(fechaFin);
@@ -565,10 +678,16 @@ async function confirmarReserva(cocheId) {
         totalPrice = tarifa.prices["1-3_days"] * diferenciaEnDias;
     } else if (diferenciaEnDias <= 6) {
         totalPrice = tarifa.prices["4-6_days"] * diferenciaEnDias;
-    } else if (diferenciaEnDias <= 7) {
+    } else if (diferenciaEnDias >= 7 && diferenciaEnDias < 31) {
         totalPrice = tarifa.prices["7_days"] * diferenciaEnDias;
-    } else {
-        totalPrice = tarifa.prices["1_month"];
+    } else if (diferenciaEnDias === 31) {
+        totalPrice = tarifa.prices["1_month"] * 1;
+    } else if (diferenciaEnDias >= 32) {
+        diasTotales = diferenciaEnDias;
+        precioVariante = tarifa.prices["1_month"] / 31;
+        precioVariante = Math.round(precioVariante * 100) / 100;
+        totalPrice = tarifa.prices["1_month"] + ((diasTotales - 31) * precioVariante);
+        totalPrice = Math.round(totalPrice * 100) / 100;
     }
 
     totalPrice += tarifa.deposit;
@@ -606,7 +725,7 @@ async function confirmarReserva(cocheId) {
 async function renderTusReservas() {
     try {
         const userId = localStorage.getItem('userId');
-        
+
         console.log('ID de usuario obtenido:', userId);
 
         if (!userId) {
@@ -614,7 +733,7 @@ async function renderTusReservas() {
         }
 
         const response = await fetch('http://localhost:5000/reservations/userReservations', {
-            method: 'GET', 
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'x-auth-token': localStorage.getItem('token')
@@ -625,7 +744,7 @@ async function renderTusReservas() {
             throw new Error("Elemento 'lista-reservas' no encontrado.");
         }
 
-        listaReservas.innerHTML = ''; 
+        listaReservas.innerHTML = '';
 
         if (!response.ok) {
             if (response.status === 404) {
