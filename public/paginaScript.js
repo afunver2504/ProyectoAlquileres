@@ -545,9 +545,12 @@ async function seleccionarCoche(cocheId, cocheNombre) {
 
         const detallesReserva = `
             <h3>Reserva para ${cocheNombre}</h3>
+            <button id="ver-dias-reservados">Días reservados</button>
+            <div id="dias-reservados" style="display: none; margin-top: 10px;"></div>
         `;
         document.getElementById('tarifa-detalles').innerHTML = detallesReserva;
-
+        const botonVerDias = document.getElementById('ver-dias-reservados');
+        botonVerDias.addEventListener('click', () => obtenerDiasReservados(cocheId));
         document.getElementById('fecha-inicio').addEventListener('change', () => actualizarPrecio());
         document.getElementById('fecha-fin').addEventListener('change', () => actualizarPrecio());
         document.getElementById('seleccionar-tarifa').addEventListener('change', () => actualizarPrecio());
@@ -555,6 +558,66 @@ async function seleccionarCoche(cocheId, cocheNombre) {
     } catch (error) {
         console.error('Error al seleccionar el coche:', error);
         alert('No se pudieron cargar los detalles del coche.');
+    }
+}
+
+async function obtenerDiasReservados(cocheId) {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No tienes un token de autenticación.');
+        }
+
+        const response = await fetch(`http://localhost:5000/reservations/dias/${cocheId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-auth-token': token
+            }
+        });
+
+        const contenedorDias = document.getElementById('dias-reservados');
+        if (!contenedorDias) {
+            throw new Error("Elemento 'dias-reservados' no encontrado.");
+        }
+
+        contenedorDias.innerHTML = '';
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error del servidor: ${response.status} - ${errorText}`);
+        }
+
+        const data = await response.json();
+        console.log('Datos obtenidos:', data);
+
+        const modal = document.createElement('div');
+        modal.className = 'modal modal-dias';
+        modal.innerHTML = `
+            <div class="modal-dias-content">
+                <h2>Días Reservados</h2>
+                ${data.dates && data.dates.length > 0 ? `
+                    <ul>
+                        ${data.dates.map(dia => {
+                            const startDate = new Date(dia.startDate).toLocaleDateString();
+                            const endDate = new Date(dia.endDate).toLocaleDateString();
+                            return `
+                                <li>
+                                    <strong>Desde:</strong> ${startDate} 
+                                    <strong>Hasta:</strong> ${endDate}
+                                </li>
+                            `;
+                        }).join('')}
+                    </ul>
+                ` : `<p>Actualmente este coche no está reservado ningún día.</p>`}
+                <button onclick="cerrarModal()">Cerrar</button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+    } catch (error) {
+        console.error('Error al obtener los días reservados:', error);
+        alert('No se pudieron cargar los días reservados.');
     }
 }
 
@@ -761,7 +824,8 @@ async function renderTusReservas() {
         }
 
         const reservas = await response.json();
-
+        console.log(reservas);
+        
         reservas.forEach(reserva => {
             const imagenCoche = obtenerRutaImagen(reserva.nombreVehiculo);
             const reservaHTML = `

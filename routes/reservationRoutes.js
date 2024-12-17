@@ -20,6 +20,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+const isDateOverlap = (newStart, newEnd, existingStart, existingEnd) => {
+    return newStart <= existingEnd && newEnd >= existingStart;
+};
 
 router.post('/createReservation', verificarToken, upload.single('contract'), async (req, res) => {
     try {
@@ -38,6 +41,13 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
 
         if (isNaN(start) || isNaN(end) || start >= end) {
             return res.status(400).json({ message: 'Las fechas no son válidas.' });
+        }
+
+        const reservasExistentes = await Reservation.find({ carId });
+        for (const reserva of reservasExistentes) {
+            if (isDateOverlap(start, end, reserva.start, reserva.end)) {
+                return res.status(400).json({ message: 'El coche ya está reservado en las fechas seleccionadas.' });
+            }
         }
 
         const diasReserva = (end - start) / (1000 * 3600 * 24);
@@ -156,6 +166,30 @@ router.get('/:id', verificarToken, async (req, res) => {
     } catch (error) {
         console.error('Error al obtener detalles de la reserva:', error);
         res.status(500).json({ message: 'Error al obtener detalles de la reserva.' });
+    }
+});
+
+router.get('/dias/:carId', async (req, res) => {
+    try {
+        const { carId } = req.params;
+
+        const reservas = await Reservation.find({ carId });
+
+        if (!reservas || reservas.length === 0) {
+            return res.status(200).json({ message: 'Este coche no tiene días reservados.', dates: [] });
+        }
+
+        const diasReservados = reservas.map(reserva => {
+            return {
+                startDate: reserva.selectedDates[0],
+                endDate: reserva.selectedDates[1]    
+            };
+        });
+
+        res.status(200).json({ dates: diasReservados });
+    } catch (error) {
+        console.error('Error al obtener días reservados:', error);
+        res.status(500).json({ message: 'Error al obtener los días reservados.' });
     }
 });
 
