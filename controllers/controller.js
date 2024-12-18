@@ -67,9 +67,27 @@ async function register(req, res) {
         if (contraseña.length < 6) {
             throw new Error("La contraseña debe tener al menos 6 caracteres.");
         }
+        
+        const hoy = new Date();
+        const nacimiento = new Date(fechaNacimiento);
+        const expedicion = new Date(fechaExpedicion);
+
+        const edad = hoy.getFullYear() - nacimiento.getFullYear();
+        if (edad < 18 || (edad === 18 && hoy < new Date(nacimiento.setFullYear(nacimiento.getFullYear() + 18)))) {
+            throw new Error("Debes tener al menos 18 años para registrarte.");
+        }
+
+        if (expedicion > hoy) {
+            throw new Error("La fecha de expedición del carnet no puede ser futura.");
+        }
+
+        if (expedicion <= nacimiento) {
+            throw new Error("La fecha de expedición del carnet debe ser posterior a tu fecha de nacimiento.");
+        }
 
         const existingUser = await User.findOne({ $or: [{ dni }, { correo }] });
         if (existingUser) {
+            
             throw new Error("El DNI o el correo electrónico ya están en uso.");
         }
 

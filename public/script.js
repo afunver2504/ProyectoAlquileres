@@ -294,7 +294,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
         if (response.ok) {
             alert('Usuario registrado exitosamente');
         } else {
-            alert(result.message || 'Error al registrar el usuario');
+            alert(result.message || 'Asegurese que todos los datos son correctos o tengan sentido');
         }
     } catch (error) {
         console.error('Error:', error);

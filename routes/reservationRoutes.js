@@ -5,6 +5,7 @@ const fs = require('fs');
 const Reservation = require('../models/reservation');
 const Vehicle = require('../models/vehicle');
 const { verificarToken } = require('../middleware/auth');
+const User = require('../models/users');
 
 const router = express.Router();
 
@@ -20,9 +21,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-const isDateOverlap = (newStart, newEnd, existingStart, existingEnd) => {
-    return newStart <= existingEnd && newEnd >= existingStart;
-};
+function isDateOverlap(start1, end1, start2, end2) {
+    return (start1 <= end2) && (end1 >= start2);
+}
 
 router.post('/createReservation', verificarToken, upload.single('contract'), async (req, res) => {
     try {
@@ -43,10 +44,46 @@ router.post('/createReservation', verificarToken, upload.single('contract'), asy
             return res.status(400).json({ message: 'Las fechas no son válidas.' });
         }
 
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0); 
+
+        if (start < hoy) {
+            return res.status(400).json({ message: 'No puedes reservar fechas que ya han pasado.' });
+        }
+
+        const user = await User.findById(req.user._id);
+        if (!user) {
+            return res.status(404).json({ message: 'Usuario no encontrado.' });
+        }
+
+        const edadUsuario = hoy.getFullYear() - new Date(user.fechaNacimiento).getFullYear();
+        const añosCarnet = hoy.getFullYear() - new Date(user.fechaExpedicion).getFullYear();
+        const fechaCaducidad = new Date(user.fechaCaducidad);
+
+        if (edadUsuario < 24) {
+            return res.status(403).json({ message: 'Debes tener al menos 24 años para realizar una reserva.' });
+        }
+
+        if (añosCarnet < 2) {
+            return res.status(403).json({ message: 'Debes tener al menos 2 años con el carnet de conducir para reservar.' });
+        }
+
+        if (hoy > fechaCaducidad) {
+            return res.status(403).json({ message: 'No puedes reservar porque tu carnet de conducir está caducado.' });
+        }
+
+        if (start > fechaCaducidad || end > fechaCaducidad) {
+            return res.status(403).json({ 
+                message: 'No puedes reservar porque tu carnet de conducir caducará antes o durante el período de reserva.' 
+            });
+        }
+
         const reservasExistentes = await Reservation.find({ carId });
         for (const reserva of reservasExistentes) {
-            if (isDateOverlap(start, end, reserva.start, reserva.end)) {
-                return res.status(400).json({ message: 'El coche ya está reservado en las fechas seleccionadas.' });
+            if (isDateOverlap(start, end, reserva.selectedDates[0], reserva.selectedDates[1])) {
+                return res.status(400).json({
+                    message: 'El coche ya está reservado en las fechas seleccionadas.'
+                });
             }
         }
 

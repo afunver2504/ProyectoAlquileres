@@ -1,0 +1,16 @@
+-Del horario, cambiar el color de la letra de las horas a uno normal, el del domingo no
+Intentar hacer la tabla más visual (intentar usar el color verde)
+
+-Del catalogo, mover la parte de las fianzas y ponerla centrada
+
+-Intentar hacer mejor diseño en la parte de los contactos
+
+-Hacer que se borren automaticamente las reservas una vez pasado el tiempo de alquiler
+
+-Verificación por correo
+
+-Foto dni/carnet a la hora de registrarse
+
+-Mejorar el diseño de la parte en la que se inicia sesión y se registran los usuarios
+
+

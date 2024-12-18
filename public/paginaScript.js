@@ -145,14 +145,7 @@ function mostrarContenido(opcion) {
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h4>Correo Electrónico</h4>
-                                <p><a href="mailto:correoempresallumacar@gmail.com">correoempresallumacar@gmail.com</a></p>
-                            </div>
-                        </div>
-                        <div class="contacto-item">
-                            <i class="fab fa-instagram"></i>
-                            <div>
-                                <h4>Instagram</h4>
-                                <p>@llumacarAlquileres</p>
+                                <p><a href="mailto:correoempresallumacar@gmail.com">admon.fabricamotor@gmail.com</a></p>
                             </div>
                         </div>
                         <div class="contacto-item">
