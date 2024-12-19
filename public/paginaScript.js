@@ -275,8 +275,8 @@ function mostrarContenido(opcion) {
 
             break;
 
-            case 'reserva':
-                contenido.innerHTML = `
+        case 'reserva':
+            contenido.innerHTML = `
                     <h2 style="text-align: center; color: #f8fafc;">Reserva un coche</h2>
                     <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">Selecciona un coche y haz tu reserva de forma sencilla.</p>
                     <div id="botones-coches"></div>
@@ -302,9 +302,9 @@ function mostrarContenido(opcion) {
                         <button id="confirmar-reserva" class="boton-reserva">Confirmar Reserva</button>
                     </div>
                 `;
-                renderCochesReserva();
-                break;
-            
+            renderCochesReserva();
+            break;
+
         case 'tus-reservas':
             contenido.innerHTML = `
                     <h2 style="text-align: center; color: #f8fafc;">Tus Reservas</h2>
@@ -313,6 +313,31 @@ function mostrarContenido(opcion) {
                 `;
             renderTusReservas();
             break;
+
+        case 'retroalimentacion':
+            contenido.innerHTML = `
+                    <h2 style="text-align: center; color: #f8fafc;">Sugerencias</h2>
+                    <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">
+                        Tu opinión nos ayuda a mejorar. Por favor, califica tu experiencia.
+                    </p>
+                    <form id="feedback-form" class="feedback-container">
+                        <label style="color: #2c3e50;">Califica el diseño:</label>
+                        <div class="rating" id="design-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <label style="color: #2c3e50;">Califica la usabilidad:</label>
+                        <div class="rating" id="usability-rating">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <label for="feedback-comment" style="color: #2c3e50;">Comentarios adicionales:</label>
+                        <textarea id="feedback-comment" placeholder="Escribe tus sugerencias aquí"></textarea>
+                        <button id="submit-feedback">Enviar Feedback</button>
+                    </form>
+                `;
+            inicializarFeedbackForm();
+            break;
+
+
         default:
             contenido.innerHTML = '<p>Descripción inicial (Lorem ipsum)</p>';
             break;
@@ -544,7 +569,7 @@ async function seleccionarCoche(cocheId, cocheNombre) {
         `;
         document.getElementById('tarifa-detalles').innerHTML = detallesReserva;
 
-        
+
         const botonVerDias = document.getElementById('ver-dias-reservados');
         botonVerDias.addEventListener('click', () => obtenerDiasReservados(cocheId));
         document.getElementById('fecha-inicio').addEventListener('change', () => actualizarPrecio());
@@ -876,6 +901,56 @@ async function cancelarReserva(reservaId) {
     }
 }
 
+async function enviarFormularioFeedback() {
+    const userId = localStorage.getItem("userId");
+    const designRating = document.querySelectorAll('#design-rating .selected').length;
+    const usabilityRating = document.querySelectorAll('#usability-rating .selected').length;
+    const comment = document.getElementById('feedback-comment').value;
+
+    if (!designRating || !usabilityRating) {
+        alert("Por favor, califica todos los aspectos antes de enviar.");
+        return;
+    }
+
+    const feedback = { userId, designRating, usabilityRating, comment };
+
+    try {
+        const response = await fetch("http://localhost:5000/api/submitFeedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(feedback),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert("¡Gracias por tu opinión!");
+        } else {
+            alert(result.error || "Ocurrió un error al enviar tu feedback.");
+        }
+    } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+        alert("No se pudo enviar el formulario. Inténtalo más tarde.");
+    }
+}
+
+function inicializarFeedbackForm() {
+    document.querySelectorAll(".rating").forEach(rating => {
+        rating.addEventListener("click", function (event) {
+            if (event.target.tagName === "SPAN") {
+                const index = [...this.children].indexOf(event.target);
+                [...this.children].forEach((star, i) => {
+                    star.classList.toggle("selected", i <= index);
+                });
+            }
+        });
+    });
+
+    document.getElementById("submit-feedback").addEventListener("click", function (event) {
+        event.preventDefault();
+        enviarFormularioFeedback();
+    });
+}
+
 function cerrarModal() {
     const modal = document.querySelector('.modal');
     if (modal) modal.remove();
@@ -901,11 +976,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const opcionesMenu = document.getElementById('opciones-menu');
     const menuLateral = document.getElementById('menu-lateral');
 
-    opcionesMenu.style.display = 'none';  
-    menuLateral.classList.remove('open'); 
+    opcionesMenu.style.display = 'none';
+    menuLateral.classList.remove('open');
 
     const iconoMenu = document.getElementById('icono-menu');
-    iconoMenu.addEventListener('click', toggleMenu); 
+    iconoMenu.addEventListener('click', toggleMenu);
 });
 
 document.addEventListener('DOMContentLoaded', async function () {

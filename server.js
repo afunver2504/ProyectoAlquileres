@@ -5,6 +5,7 @@ const auth_paths = require("./routes/userRoutes.js");
 const vehiclePaths = require("./routes/vehicleRoutes.js");
 const reservationRoutes = require('./routes/reservationRoutes');
 const Vehicle = require('./models/vehicle');
+const formularioRoutes = require('./routes/formularioRoutes');
 
 console.log("Iniciando servidor...");
 conector.conexion(); 
@@ -43,6 +44,7 @@ app.get('/vehicles/cars/:id/:name', async (req, res) => {
 app.use("/auth", auth_paths.router);
 app.use("/vehicles", vehiclePaths); 
 app.use("/reservations", reservationRoutes);
+app.use("/api", formularioRoutes);
 
 
 
