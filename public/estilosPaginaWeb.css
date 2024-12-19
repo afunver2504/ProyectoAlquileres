@@ -13,7 +13,7 @@ body {
 
 #menu-lateral {
     width: 60px;  
-    background-color: #2c3e50;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
     color: white;
     height: 100vh;
     position: fixed;
@@ -24,6 +24,8 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     overflow: hidden;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .icono-menu {
@@ -31,18 +33,24 @@ body {
     cursor: pointer;
     padding: 20px;
     text-align: center;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
     margin-top: 20px;
+    background-color: #34495e;
 }
 
 .icono-menu:hover {
-    background-color: #34495e;
+    background-color: #16a085;
 }
 
 #opciones-menu {
     display: none;
     flex-direction: column;
     margin-top: 40px;
+    width: 100%;
+}
+
+#menu-lateral.expanded #opciones-menu {
+    display: flex;
 }
 
 #opciones-menu ul {
@@ -52,35 +60,84 @@ body {
 }
 
 #opciones-menu li {
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.3s ease;
     border-bottom: 1px solid #34495e;
+    border-radius: 8px;
 }
 
 #opciones-menu li:hover {
     background-color: #16a085;
+    transform: scale(1.05);
+}
+
+.menu-lateral .opciones-menu ul li[data-opcion="reserva"],
+.menu-lateral .opciones-menu ul li[data-opcion="tus-reservas"] {
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 8px;
+}
+
+.menu-lateral .opciones-menu ul li[data-opcion="reserva"]:hover,
+.menu-lateral .opciones-menu ul li[data-opcion="tus-reservas"]:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.usuario-info {
+    margin-top: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#cerrarSesion {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#cerrarSesion:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+#menu-lateral.expanded {
+    width: 250px;
+}
+
+#opciones-menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    width: 100%;
 }
 
 .contenido {
     margin-left: 60px; 
-    padding: 20px;
+    padding: 25px;
     flex-grow: 1;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: margin-left 0.3s ease; 
-    
-    
+    background: linear-gradient(135deg, #eafaf1, #d8f5e4);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    transition: margin-left 0.3s ease, background-color 0.5s ease;
 }
 
 .imagen-empresa img {
-    width: 150px;
-    height: auto;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    max-width: 150px;
+    display: block;
+    margin: 0 auto 20px auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3)); 
+    border-radius: 10px;
 }
 
 #contenido-cambio {
@@ -176,42 +233,46 @@ body {
 .bienvenida-contenido {
     text-align: center;
     margin: 50px auto;
-    padding: 20px;
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1e293b, #334155);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    max-width: 850px;
     animation: fadeIn 1.5s ease-out;
+    color: #e0e0e0; 
 }
 
 .bienvenida-titulo {
-    font-size: 2.5rem;
-    color: #2c3e50;
+    font-size: 2.8rem;
+    color: #f3f4f6;
     margin-bottom: 20px;
-    font-family: 'Georgia', serif;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
     animation: slideInFromLeft 1s ease-in-out;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .bienvenida-descripcion {
-    font-size: 1.2rem;
-    color: #34495e;
+    font-size: 1.3rem;
+    color: #cbd5e1;
     line-height: 1.8;
     margin-bottom: 20px;
     animation: fadeInText 2s ease-in;
+    font-family: 'Roboto', sans-serif;
 }
 
 .bienvenida-gratitud {
-    font-size: 1.1rem;
-    color: #3c6382;
+    font-size: 1.2rem;
+    color: #94a3b8;
     font-style: italic;
     animation: slideInFromRight 1.2s ease-in-out;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Animaciones */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
     to {
         opacity: 1;
@@ -222,7 +283,7 @@ body {
 @keyframes slideInFromLeft {
     from {
         opacity: 0;
-        transform: translateX(-50%);
+        transform: translateX(-30%);
     }
     to {
         opacity: 1;
@@ -242,7 +303,7 @@ body {
 @keyframes slideInFromRight {
     from {
         opacity: 0;
-        transform: translateX(50%);
+        transform: translateX(30%);
     }
     to {
         opacity: 1;
@@ -254,43 +315,72 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden; 
 }
 
 thead tr {
-    background-color: #2c3e50;
-    color: white;
+    background-color: #1e293b; 
+    color: #f8fafc; 
+    text-transform: uppercase; 
+    font-size: 0.875rem; 
+    letter-spacing: 0.05em; 
 }
 
 th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
+    padding: 15px; 
+    text-align: left; 
+    font-family: 'Poppins', sans-serif; 
+    font-size: 1rem;
+    color: #334155;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f1f5f9; 
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ffffff; 
 }
 
 td:last-child {
-    color: #d32f2f; 
+    color: inherit; 
 }
+
+tfoot {
+    background-color: #f8fafc; 
+    font-size: 0.875rem;
+    color: #475569;
+    text-align: center;
+}
+
 
 .categoria {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 20px;
-    padding: 15px;
-    border: 2px solid #333;
-    background: #ffffff;
-    border-radius: 5px;
+    gap: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.categoria:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }
 
 .categoria h3 {
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
+    color: #1f2937;
+    margin-bottom: 15px;
     text-align: center;
 }
 
@@ -301,61 +391,70 @@ td:last-child {
     padding: 0;
     margin: 0;
     list-style: none;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .categoria ul li {
-    flex: 1 1 calc(20% - 20px);
-    max-width: 200px;
+    flex: 1 1 calc(25% - 20px);
+    max-width: 220px;
     text-align: center;
-    border: 2px solid #e0e0e0;
-    background: #f9f9f9;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    border: 2px solid #d1d5db;
+    background: linear-gradient(135deg, #ffffff, #f9fafb);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s, box-shadow 0.4s;
     cursor: pointer;
 }
 
 .categoria ul li:hover {
-    transform: scale(1.05); 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    border-color: #007bff; 
+    transform: scale(1.07);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: #2563eb;
 }
 
 .categoria ul li h4 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: #333;
-    margin: 0 0 5px;
+    color: #111827;
+    margin: 0 0 8px;
 }
 
 .categoria ul li p {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0 0 10px;
+    font-size: 0.95rem;
+    color: #6b7280;
+    margin: 0 0 12px;
 }
 
 .categoria ul li img {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 120px;
+    max-height: 130px;
     object-fit: cover;
-    margin: 0 auto;
-    border-radius: 5px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.categoria ul li img:hover {
+    transform: scale(1.05);
 }
 
 .tabla-precios {
-    flex: 0 0 150px;
-    border: 2px solid #007bff;
-    border-radius: 10px;
-    background: #ffffff;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+    flex: 0 0 180px;
+    border: 2px solid #2563eb;
+    border-radius: 12px;
+    background: #f3f4f6;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     align-self: flex-start;
+    transition: transform 0.3s ease;
+}
+
+.tabla-precios:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .tabla-precios table {
@@ -363,28 +462,44 @@ td:last-child {
     border-collapse: collapse;
 }
 
-.tabla-precios table td, 
+.tabla-precios table td,
 .tabla-precios table th {
-    padding: 8px;
+    padding: 10px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #d1d5db;
 }
 
 .tabla-precios table th {
     font-weight: bold;
-    color: #333;
+    color: #1f2937;
 }
 
 .tabla-precios table tr:hover {
-    background-color: #f1f1f1; 
+    background-color: #e5e7eb;
 }
 
 .tabla-precios .fianza {
     text-align: center;
     font-weight: bold;
-    color: #007bff;
-    background: #f1f1f1;
-    padding: 10px;
+    color: #2563eb;
+    background: #e5e7eb;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.categoria ul li {
+    animation: fadeIn 0.8s ease-out;
 }
 
 @media (max-width: 1024px) {
@@ -395,13 +510,13 @@ td:last-child {
 
 @media (max-width: 768px) {
     .categoria ul li {
-        flex: 1 1 calc(50% - 20px); 
+        flex: 1 1 calc(50% - 20px);
     }
 }
 
 @media (max-width: 480px) {
     .categoria ul li {
-        flex: 1 1 100%; 
+        flex: 1 1 100%;
     }
 }
 
@@ -516,19 +631,15 @@ td:last-child {
     color: #000;
 }
 
-
-.calendar-placeholder {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #555;
-}
-
 .contacto-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     max-width: 600px;
     margin: 0 auto;
+    opacity: 0; 
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards; 
 }
 
 .contacto-item {
@@ -539,11 +650,23 @@ td:last-child {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contacto-item i {
     font-size: 24px;
     color: #16a085;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.contacto-item:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.contacto-item:hover i {
+    transform: rotate(10deg); 
+    color: #2c3e50;
 }
 
 .contacto-item h4 {
@@ -561,46 +684,63 @@ td:last-child {
 .contacto-item a {
     color: #16a085;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .contacto-item a:hover {
     color: #2c3e50;
 }
 
-.menu-lateral .opciones-menu ul li[data-opcion="reserva"],
-.menu-lateral .opciones-menu ul li[data-opcion="tus-reservas"] {
-    padding: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.menu-lateral .opciones-menu ul li[data-opcion="reserva"]:hover,
-.menu-lateral .opciones-menu ul li[data-opcion="tus-reservas"]:hover {
-    background-color: #007bff;
-    color: white;
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 #terminos-condiciones {
     font-family: Arial, sans-serif;
     margin: 20px;
     line-height: 1.6;
+    opacity: 0; 
+    transform: translateX(-20px); 
+    animation: fadeInSlide 0.8s ease-out forwards; 
 }
 
 .termino {
     margin-bottom: 15px;
     padding: 15px;
-    background-color: #f9f9f9;
+    background: linear-gradient(135deg, #f9f9f9, #e9ecef);
     border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.termino:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
 .termino h3 {
     color: #2c3e50;
     margin-bottom: 10px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.termino h3:hover {
+    color: #16a085; 
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #16a085; 
 }
 
 .termino p {
     color: #555;
+    font-size: 15px;
+    margin: 0;
 }
 
 .aviso-contrato {
@@ -609,37 +749,156 @@ td:last-child {
     font-style: italic;
     margin-top: 20px;
     text-align: center;
+    opacity: 0; 
+    animation: fadeIn 1s ease-out forwards; 
+    animation-delay: 0.5s; 
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.titulo-contrato {
+    text-align: center;
+    font-size: 28px;
+    color: #f8fafc;
+    animation: fadeInDown 1s ease-out;
+}
+
+.descripcion-contrato {
+    text-align: center;
+    color: #f8fafc;
+    margin-bottom: 20px;
+    font-size: 16px;
+    animation: fadeInDown 1.2s ease-out;
 }
 
 #informacion-contrato {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 20px auto;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    background: linear-gradient(135deg, #f9f9f9, #e9ecef);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeInUp 1.5s ease-out;
 }
 
-button:hover {
-    background-color: #3498db;  
+.instrucciones-contrato {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.nota-contrato {
+    color: #888;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.btn-descargar {
+    background-color: #2980b9;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-descargar:hover {
+    background-color: #3498db;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-descargar:active {
+    transform: translateY(1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reservas-contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 20px;
 }
 
 .reserva-item {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
-    background: #f9f9f9;
-    padding: 15px;
+    align-items: center;
+    background: #fff;
+    padding: 20px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reserva-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .reserva-detalle {
     flex: 1;
-    padding-right: 20px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+}
+
+.reserva-detalle h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #34495e;
+}
+
+.reserva-detalle p {
+    font-size: 14px;
+    color: #7f8c8d;
 }
 
 .reserva-imagen {
@@ -652,40 +911,183 @@ button:hover {
 
 .imagen-coche {
     width: 100%;
-    height: auto;
+    height: 160px;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.imagen-coche:hover {
+    transform: scale(1.05);
 }
 
 .reserva-acciones {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%; 
+    height: 100%;
 }
 
 .boton-cancelar {
-    padding: 10px 15px;
+    padding: 12px 18px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     background-color: #e74c3c;
     color: #fff;
-    display: block;
-    margin-top: auto;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
 }
 
 .boton-cancelar:hover {
     background-color: #c0392b;
+    transform: scale(1.05);
 }
 
 .sin-reservas {
     text-align: center;
     color: #555;
     padding: 20px;
+    font-size: 16px;
 }
+
+.sin-reservas img {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    margin-top: 20px;
+}
+
+#detalles-reserva {
+    background-color: #2d2d2d;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: #f8fafc;
+}
+
+label {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: inline-block;
+    font-weight: 500;
+    color: #f8fafc;
+}
+
+input[type="date"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #333;
+    color: #f8fafc;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+input[type="date"]:focus,
+select:focus {
+    background-color: #444;
+    border-color: #7f7f7f;
+}
+
+.boton-reserva {
+    background-color: #FF5722;
+    color: #f8fafc;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.boton-reserva:hover {
+    background-color: #E64A19;
+    transform: translateY(-3px);
+}
+
+.boton-reserva:active {
+    transform: translateY(1px);
+}
+
+@keyframes bottonGlow {
+    0% { box-shadow: 0 0 5px #FF5722; }
+    50% { box-shadow: 0 0 20px #FF5722; }
+    100% { box-shadow: 0 0 5px #FF5722; }
+}
+
+.boton-reserva:focus {
+    animation: bottonGlow 1s infinite;
+}
+
+#ver-dias-reservados {
+    background-color: #4CAF50; 
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px; 
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+#ver-dias-reservados:hover {
+    background-color: #45a049; 
+    transform: translateY(-2px); 
+}
+
+#ver-dias-reservados:active {
+    transform: translateY(1px);
+}
+
+#ver-dias-reservados:focus {
+    outline: none;
+    box-shadow: 0 0 5px 2px rgba(76, 175, 80, 0.7); 
+}
+
+#contrato-upload {
+    display: none;
+}
+
+#contrato-upload + label {
+    display: inline-block;
+    background-color: #4CAF50; 
+    color: white;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+#contrato-upload + label:hover {
+    background-color: #45a049; 
+    transform: translateY(-2px); 
+}
+
+#contrato-upload + label:active {
+    transform: translateY(1px); 
+}
+
+#contrato-upload + label::before {
+    content: 'Subir contrato'; 
+}
+
+#contrato-upload:focus + label {
+    outline: none;
+    box-shadow: 0 0 5px 2px rgba(76, 175, 80, 0.7); 
+}
+
 
 
 

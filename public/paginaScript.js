@@ -22,40 +22,42 @@ function mostrarContenido(opcion) {
     switch (opcion) {
         case 'horario':
             contenido.innerHTML =
-                `<h2 style="text-align: center; color: #2c3e50;">Horario de Atención</h2>
-            <p style="text-align: center; color: #555;">Nuestro horario de atención es el siguiente:</p>
-            <table style="width: 100%; margin-top: 20px; border-collapse: collapse; background-color: #f8f9fa; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <thead>
-                <tr style="background-color: #2c3e50; color: white;">
-                    <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ccc;">Día</th>
-                    <th style="padding: 10px; text-align: left; border-bottom: 2px solid #ccc;">Horario</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #ccc;">Lunes a Viernes</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ccc;">8:00 AM - 8:00 PM</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #ccc;">Sábado</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ccc;">10:00 AM - 2:00 PM</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border-bottom: 1px solid #ccc;">Domingo</td>
-                    <td style="padding: 10px; border-bottom: 1px solid #ccc; color: #d32f2f;">Cerrado</td>
-                </tr>
-            </tbody>
+                `<h2 style="text-align: center; color: #f8fafc; font-family: 'Poppins', sans-serif; font-size: 2rem;">Horario de Atención</h2>
+        <p style="text-align: center; color: #cbd5e1; font-family: 'Poppins', sans-serif; font-size: 1rem;">Nuestro horario de atención es el siguiente:</p>
+        <div style="overflow-x: auto; padding: 15px;">
+            <table style="width: 100%; margin-top: 20px; border-collapse: collapse; background: linear-gradient(135deg, #ffffff, #f0f4f8); border-radius: 12px; box-shadow: 0 6px 12px rgba(0,0,0,0.15);">
+                <thead>
+                    <tr style="background-color: #1e293b; color: #f8fafc; text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.05em;">
+                        <th style="padding: 15px; text-align: left; border-bottom: 3px solid #475569;"><p style="color: #f8fafc;">Día</p></th>
+                        <th style="padding: 15px; text-align: left; border-bottom: 3px solid #475569;"><p style="color: #f8fafc;">Horario</p></th>
+                    </tr>
+                </thead>
+                <tbody style="font-size: 1rem; color: #0f172a;">
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">Lunes a Viernes</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: #3b82f6;">8:00 AM - 8:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">Sábado</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: #3b82f6;">10:00 AM - 2:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0;">Domingo</td>
+                        <td style="padding: 15px; border-bottom: 1px solid #e2e8f0; color: #ef4444; font-weight: bold;">Cerrado</td>
+                    </tr>
+                </tbody>
             </table>
-            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #777;">
+        </div>
+        <p style="text-align: center; margin-top: 20px; font-size: 0.875rem; color: #e2e8f0; font-family: 'Poppins', sans-serif;">
             Si tienes alguna consulta fuera de nuestro horario, puedes contactarnos a través de nuestro correo electrónico o redes sociales. ¡Estaremos encantados de ayudarte!
-            </p>`;
+        </p>`;
             break;
 
         case 'ubicacion':
             contenido.innerHTML =
-                `<h2 style="text-align: center; color: #2c3e50;">Nuestra Ubicación</h2>
-            <p style="text-align: center; color: #555;">Estamos ubicados en:</p>
-            <p style="text-align: center; font-size: 18px; font-weight: bold; color: #2c3e50;">Carrer de la Riera, 26, 08397 Pineda de Mar, Barcelona</p>
+                `<h2 style="text-align: center; color: #f8fafc;">Nuestra Ubicación</h2>
+            <p style="text-align: center; color: #f8fafc;">Estamos ubicados en:</p>
+            <p style="text-align: center; font-size: 18px; font-weight: bold; color: #f8fafc;">Carrer de la Riera, 26, 08397 Pineda de Mar, Barcelona</p>
             <div style="text-align: center; margin-top: 20px;">
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3136.0732211469863!2d2.681722215203555!3d41.62486107924451!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12bb271fa23c57f1%3A0x2bc8a153d5b2e73a!2sCarrer%20de%20la%20Riera%2C%2026%2C%2008397%20Pineda%20de%20Mar%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1696604845641!5m2!1ses!2ses" 
@@ -67,16 +69,16 @@ function mostrarContenido(opcion) {
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
-            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #777;">
+            <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #f8fafc;">
                 Haz clic en el mapa para abrirlo en Google Maps y obtener indicaciones.
             </p>`;
             break;
 
         case 'catalogo':
             contenido.innerHTML =
-                `<h2 style="text-align: center; color: #2c3e50;">Catálogo de Coches</h2>
-        <p style="text-align: center; color: #555; margin-bottom: 20px;">Explora nuestra amplia gama de vehículos y selecciona el que mejor se adapte a tus necesidades.</p>
-        <div class="categorias">
+                `<h2 style="text-align: center; color: #f8fafc; font-family: 'Poppins', sans-serif; font-size: 2rem;">Catálogo de Coches</h2>
+                <p style="text-align: center; color: #f8fafc; margin-bottom: 20px; font-family: 'Poppins', sans-serif;">Explora nuestra amplia gama de vehículos y selecciona el que mejor se adapte a tus necesidades.</p>
+                <div class="categorias">
             ${renderCategoria("Económica", 350, [
                     { _id: "67518fb67d4694257445cbee", nombre: "Renault Clio Diesel", imagen: "image/RenaultClioDiesel.jfif", descripcion: "Compacto y económico, ideal para ciudad." },
                     { _id: "67518fb67d4694257445cbef", nombre: "Peugeot 208 Diesel", imagen: "image/Peugeot208Diesel.jfif", descripcion: "Ágil y eficiente, perfecto para trayectos cortos." },
@@ -122,8 +124,8 @@ function mostrarContenido(opcion) {
             break;
         case 'contactos':
             contenido.innerHTML =
-                `<h2 style="text-align: center; color: #2c3e50;">Contacto</h2>
-                    <p style="text-align: center; color: #555; margin-bottom: 20px;">
+                `<h2 style="text-align: center; color: #f8fafc;">Contacto</h2>
+                    <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">
                         ¿Tienes alguna pregunta? Estamos aquí para ayudarte. No dudes en ponerte en contacto con nosotros a través de cualquiera de los siguientes medios.
                     </p>
                     <div class="contacto-container">
@@ -160,8 +162,8 @@ function mostrarContenido(opcion) {
 
         case 'procedimiento':
             contenido.innerHTML = `
-                    <h2 style="text-align: center; color: #2c3e50;">Términos y Condiciones del Alquiler</h2>
-                    <p style="text-align: center; color: #555; margin-bottom: 20px;">Antes de realizar tu reserva, por favor lee atentamente los siguientes términos y condiciones. Este documento se complementa con el contrato que recibirás una vez confirmes tu alquiler.</p>
+                    <h2 style="text-align: center; color: #f8fafc;">Términos y Condiciones del Alquiler</h2>
+                    <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">Antes de realizar tu reserva, por favor lee atentamente los siguientes términos y condiciones. Este documento se complementa con el contrato que recibirás una vez confirmes tu alquiler.</p>
                     
                     <div id="terminos-condiciones">
                         <div class="termino">
@@ -246,25 +248,25 @@ function mostrarContenido(opcion) {
 
         case 'contrato':
             contenido.innerHTML = `
-                        <h2 style="text-align: center; color: #2c3e50;">Contrato de Alquiler</h2>
-                        <p style="text-align: center; color: #555; margin-bottom: 20px;">
-                            Es muy importante que rellenes correctamente todas las partes del contrato antes de proceder con tu reserva. Este contrato es el documento que deberás incluir con tu reserva para formalizar el alquiler.
+                    <h2 class="titulo-contrato">Contrato de Alquiler</h2>
+                    <p class="descripcion-contrato">
+                        Es muy importante que rellenes correctamente todas las partes del contrato antes de proceder con tu reserva. Este contrato es el documento que deberás incluir con tu reserva para formalizar el alquiler.
+                    </p>
+                    
+                    <div id="informacion-contrato">
+                        <p class="instrucciones-contrato">
+                            A continuación, puedes descargar el contrato de alquiler en formato PDF. Asegúrate de revisarlo, completarlo y firmarlo. Una vez descargado, este será el documento que deberás adjuntar al realizar la reserva.
                         </p>
                         
-                        <div id="informacion-contrato" style="text-align: center;">
-                            <p style="color: #555; margin-bottom: 20px;">
-                                A continuación, puedes descargar el contrato de alquiler en formato PDF. Asegúrate de revisarlo, completarlo y firmarlo. Una vez descargado, este será el documento que deberás adjuntar al realizar la reserva.
-                            </p>
-                            
-                            <button id="descargar-contrato" style="background-color: #2980b9; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px;">
-                                Descargar Contrato
-                            </button>
-                
-                            <p style="color: #555; font-size: 14px; margin-top: 20px;">
-                                Haz clic en el botón de arriba para descargar el contrato en formato PDF.
-                            </p>
-                        </div>
-                    `;
+                        <button id="descargar-contrato" class="btn-descargar">
+                            Descargar Contrato
+                        </button>
+            
+                        <p class="nota-contrato">
+                            Haz clic en el botón de arriba para descargar el contrato en formato PDF.
+                        </p>
+                    </div>
+                `;
 
             document.getElementById('descargar-contrato').addEventListener('click', function () {
                 const contratoUrl = "contrato/MODELO FORMULARIO ALQUILER CONVENCIONAL.pdf";
@@ -273,41 +275,40 @@ function mostrarContenido(opcion) {
 
             break;
 
-        case 'reserva':
-            contenido.innerHTML = `
-                    <h2 style="text-align: center; color: #2c3e50;">Reserva un coche</h2>
-                    <p style="text-align: center; color: #555; margin-bottom: 20px;">Selecciona un coche y haz tu reserva de forma sencilla.</p>
+            case 'reserva':
+                contenido.innerHTML = `
+                    <h2 style="text-align: center; color: #f8fafc;">Reserva un coche</h2>
+                    <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">Selecciona un coche y haz tu reserva de forma sencilla.</p>
                     <div id="botones-coches"></div>
                     <div id="detalles-reserva" style="display: none;">
-                        <h3>Detalles de la reserva</h3>
+                        <h3 style="color: #f8fafc;">Detalles de la reserva</h3>
                         <div id="tarifa-detalles"></div>
                         <div id="total-precio"></div>
                     
-                        <!-- Selección de la tarifa -->
-                        <label for="seleccionar-tarifa">Selecciona la tarifa:</label>
+                        <label for="seleccionar-tarifa" style="color: #f8fafc;">Selecciona la tarifa:</label>
                         <select id="seleccionar-tarifa">
                             <option value="Básica">Tarifa Básica</option>
                             <option value="Plus">Tarifa Plus</option>
                         </select>
             
-                        <!-- Selector de fechas -->
-                        <label for="fecha-inicio">Fecha de inicio:</label>
+                        <label for="fecha-inicio" style="color: #f8fafc;">Fecha de inicio:</label>
                         <input type="date" id="fecha-inicio" />
-                        <label for="fecha-fin">Fecha de fin:</label>
+                        <label for="fecha-fin" style="color: #f8fafc;">Fecha de fin:</label>
                         <input type="date" id="fecha-fin" />
                     
-                        <label for="contrato-upload">Sube tu contrato firmado (PDF):</label>
+                        <label for="contrato-upload" style="color: #f8fafc;">Sube tu contrato firmado (PDF):</label>
                         <input type="file" id="contrato-upload" accept=".pdf" />
-                        <button id="confirmar-reserva">Confirmar Reserva</button>
+                        <label for="contrato-upload"></label>
+                        <button id="confirmar-reserva" class="boton-reserva">Confirmar Reserva</button>
                     </div>
                 `;
-            renderCochesReserva();
-            break;
-
+                renderCochesReserva();
+                break;
+            
         case 'tus-reservas':
             contenido.innerHTML = `
-                    <h2 style="text-align: center; color: #2c3e50;">Tus Reservas</h2>
-                    <p style="text-align: center; color: #555; margin-bottom: 20px;">Visualiza tus reservas realizadas aquí.</p>
+                    <h2 style="text-align: center; color: #f8fafc;">Tus Reservas</h2>
+                    <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">Visualiza tus reservas realizadas aquí.</p>
                     <div id="lista-reservas" class="reservas-contenedor"></div>
                 `;
             renderTusReservas();
@@ -347,15 +348,15 @@ function renderCategoria(nombre, fianza, vehiculos, tarifas) {
             <table class="tarifas">
                 <thead>
                     <tr>
-                        <th>Días</th>
-                        <th>Tarifa Básica</th>
-                        <th>Tarifa Plus</th>
+                        <th><p style="color: #f8fafc;">Días</p></th>
+                        <th><p style="color: #f8fafc;">Tarifa Básica</p></th>
+                        <th><p style="color: #f8fafc;">Tarifa Plus</p></th>
                     </tr>
                 </thead>
                 <tbody>
                     ${tarifasHtml}
                     <tr>
-                        <td colspan="3" class="fianza">Fianza: ${fianza}€</td>
+                        <td colspan="3" class="fianza"><p style="text-align: center; color: red;">Fianza: ${fianza}€</p></td>
                     </tr>
                 </tbody>
             </table>
@@ -537,11 +538,13 @@ async function seleccionarCoche(cocheId, cocheNombre) {
         document.getElementById('botones-coches').style.display = 'none';
 
         const detallesReserva = `
-            <h3>Reserva para ${cocheNombre}</h3>
+            <h3 style="color: #f8fafc;">Reserva para ${cocheNombre}</h3>
             <button id="ver-dias-reservados">Días reservados</button>
             <div id="dias-reservados" style="display: none; margin-top: 10px;"></div>
         `;
         document.getElementById('tarifa-detalles').innerHTML = detallesReserva;
+
+        
         const botonVerDias = document.getElementById('ver-dias-reservados');
         botonVerDias.addEventListener('click', () => obtenerDiasReservados(cocheId));
         document.getElementById('fecha-inicio').addEventListener('change', () => actualizarPrecio());
@@ -592,15 +595,15 @@ async function obtenerDiasReservados(cocheId) {
                 ${data.dates && data.dates.length > 0 ? `
                     <ul>
                         ${data.dates.map(dia => {
-                            const startDate = new Date(dia.startDate).toLocaleDateString();
-                            const endDate = new Date(dia.endDate).toLocaleDateString();
-                            return `
+            const startDate = new Date(dia.startDate).toLocaleDateString();
+            const endDate = new Date(dia.endDate).toLocaleDateString();
+            return `
                                 <li>
                                     <strong>Desde:</strong> ${startDate} 
                                     <strong>Hasta:</strong> ${endDate}
                                 </li>
                             `;
-                        }).join('')}
+        }).join('')}
                     </ul>
                 ` : `<p>Actualmente este coche no está reservado ningún día.</p>`}
                 <button onclick="cerrarModal()">Cerrar</button>
@@ -806,8 +809,8 @@ async function renderTusReservas() {
             if (response.status === 404) {
                 listaReservas.innerHTML = `
                     <div class="sin-reservas">
-                        <p style="text-align: center; color: #555; margin-bottom: 20px;">Actualmente no tienes reservas realizadas.</p>
-                        <p style="text-align: center; color: #555; margin-bottom: 20px;">¡Anímate a reservar tu vehículo favorito!</p>
+                        <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">Actualmente no tienes reservas realizadas.</p>
+                        <p style="text-align: center; color: #f8fafc; margin-bottom: 20px;">¡Anímate a reservar tu vehículo favorito!</p>
                         <img src="image/caraTrostre.png" alt="Sin reservas" style="display: block; margin: 0 auto; width: 100px;">
                     </div>
                 `;
@@ -818,7 +821,7 @@ async function renderTusReservas() {
 
         const reservas = await response.json();
         console.log(reservas);
-        
+
         reservas.forEach(reserva => {
             const imagenCoche = obtenerRutaImagen(reserva.nombreVehiculo);
             const reservaHTML = `
@@ -873,8 +876,6 @@ async function cancelarReserva(reservaId) {
     }
 }
 
-
-
 function cerrarModal() {
     const modal = document.querySelector('.modal');
     if (modal) modal.remove();
@@ -895,6 +896,17 @@ function toggleMenu() {
         contenido.classList.add('contenido-open');
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const opcionesMenu = document.getElementById('opciones-menu');
+    const menuLateral = document.getElementById('menu-lateral');
+
+    opcionesMenu.style.display = 'none';  
+    menuLateral.classList.remove('open'); 
+
+    const iconoMenu = document.getElementById('icono-menu');
+    iconoMenu.addEventListener('click', toggleMenu); 
+});
 
 document.addEventListener('DOMContentLoaded', async function () {
     const token = localStorage.getItem('token');
